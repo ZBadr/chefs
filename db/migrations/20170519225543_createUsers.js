@@ -7,7 +7,12 @@ exports.up = function(knex, Promise) {
     .then(createIngredientsTable)
     .then(createRecipeIngredientsTable)
     .then(createOrderRecipesTable)
-    .then(createChefRecipesTable);
+    .then(createChefRecipesTable)
+    .then(createRecipeIntolerancesTable)
+    .then(createRecipeEquipmentsTable)
+    .then(createRecipeDietaryRestrictionsTable);
+
+
 
     function createUserTable () {
     return knex.schema.createTable('users', function (table) {
@@ -33,6 +38,7 @@ function createChefsTable () {
         table.string('picture').notNullable();
         table.string('description').notNullable();
         table.integer('phoneNumber').notNullable();
+        table.integer('hourlyRate').notNullable();
     });
 }
 
@@ -45,6 +51,7 @@ function createOrdersTable () {
         table.string('comment');
         table.integer('userID');
         table.integer('chefID');
+        table.integer('orderTotal');
         table.foreign('userID').references('users.id');
         table.foreign('chefID').references('chefs.id');
     });
@@ -58,9 +65,7 @@ function createRecipesTable () {
         table.string('img').notNullable();
         table.string('intolerances');
         table.string('cuisine').notNullable();
-        table.string('diet');
-        table.string('steps');
-        table.string('equipment');
+        table.string('cookingSteps');
     });
 }
 
@@ -101,11 +106,38 @@ function createChefRecipesTable () {
         table.foreign('recipeID').references('recipes.id');
     });
 }
+
+function createRecipeIntolerancesTable () {
+    return knex.schema.createTable('recipe_intolerances', function(table) {
+        table.string('intolerances');
+        table.integer('recipeID');
+        table.foreign('recipeID').references('recipes.id');
+    });
+}
+
+function createRecipeEquipmentsTable () {
+    return knex.schema.createTable('recipe_equipments', function(table) {
+        table.string('equipments');
+        table.integer('recipeID');
+        table.foreign('recipeID').references('recipes.id');
+    });
+}
+
+function createRecipeDietaryRestrictionsTable () {
+    return knex.schema.createTable('recipe_dietaryRestrictions', function(table) {
+        table.string('dietaryRestrictions');
+        table.integer('recipeID');
+        table.foreign('recipeID').references('recipes.id');
+    });
+}
   
 };
 
 exports.down = function(knex, Promise) {
-    return dropChefRecipes()
+    return dropRecipeDietaryRestrictionsTable()
+    .then(dropRecipeEquipmentsTable)
+    .then(dropRecipeIntolerancesTable)
+    .then(dropChefRecipes)
     .then(dropOrderRecipes)
     .then(dropRecipeInredients)
     .then(dropIngredients)
@@ -145,6 +177,17 @@ exports.down = function(knex, Promise) {
 
     function dropChefRecipes () {
         return knex.schema.dropTableIfExists('chef_recipes')
+    }
+
+    function dropRecipeIntolerancesTable () {
+        return knex.schema.dropTableIfExists('recipe_intolerances')
+    }
+
+    function dropRecipeEquipmentsTable () {
+        return knex.schema.dropTableIfExists('recipe_equipments')
+    }
+    function dropRecipeDietaryRestrictionsTable () {
+        return knex.schema.dropTableIfExists('recipe_dietaryRestrictions')
     }
   
 };
