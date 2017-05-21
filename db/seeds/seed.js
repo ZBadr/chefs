@@ -46,17 +46,17 @@ exports.seed = function(knex, Promise) {
                   knex('recipe_equipments').insert([{ recipeID: 2, equipment: "slow cooker" }]),
 
                   knex('recipe_ingredients').insert([{ ingredientID: 1, recipeID: 1, amount: 250, measuringUnit: 'g' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 2, recipeID: 2, amount: 4, measuringUnit: 'servings' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 3, recipeID: 3, amount: 400, measuringUnit: 'g' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 4, recipeID: 4, amount: 2, measuringUnit: '' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 5, recipeID: 5, amount: 2, measuringUnit: 'tbsp' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 6, recipeID: 6, amount: 1, measuringUnit: 'tablespoon' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 7, recipeID: 7, amount: 1, measuringUnit: '' }]) ,
-                  knex('recipe_ingredients').insert([{ ingredientID: 8, recipeID: 8, amount: 1, measuringUnit: 'c' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 9, recipeID: 9, amount: 2, measuringUnit: 'cans' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 10, recipeID: 10, amount: 0.75, measuringUnit: 'lb' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 11, recipeID: 11, amount: 16, measuringUnit: 'oz' }]),
-                  knex('recipe_ingredients').insert([{ ingredientID: 12, recipeID: 12, amount: 2, measuringUnit: 'c' }])
+                  knex('recipe_ingredients').insert([{ ingredientID: 2, recipeID: 1, amount: 4, measuringUnit: 'servings' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 3, recipeID: 1, amount: 400, measuringUnit: 'g' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 4, recipeID: 1, amount: 2, measuringUnit: '' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 5, recipeID: 1, amount: 2, measuringUnit: 'tbsp' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 6, recipeID: 1, amount: 1, measuringUnit: 'tablespoon' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 7, recipeID: 1, amount: 1, measuringUnit: '' }]) ,
+                  knex('recipe_ingredients').insert([{ ingredientID: 8, recipeID: 2, amount: 1, measuringUnit: 'c' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 9, recipeID: 2, amount: 2, measuringUnit: 'cans' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 10, recipeID: 2, amount: 0.75, measuringUnit: 'lb' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 11, recipeID: 2, amount: 16, measuringUnit: 'oz' }]),
+                  knex('recipe_ingredients').insert([{ ingredientID: 12, recipeID: 2, amount: 2, measuringUnit: 'c' }])
 
                 ]);
               });
