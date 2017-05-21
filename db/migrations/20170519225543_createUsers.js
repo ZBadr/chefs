@@ -1,4 +1,3 @@
-
 exports.up = function(knex, Promise) {
     return createUserTable()
     .then(createChefsTable)
@@ -12,128 +11,121 @@ exports.up = function(knex, Promise) {
     .then(createRecipeEquipmentsTable)
     .then(createRecipeDietaryRestrictionsTable);
 
-
-
     function createUserTable () {
-    return knex.schema.createTable('users', function (table) {
-        table.increments('id');
-        table.string('firstName').notNullable();
-        table.string('lastName').notNullable();
-        table.string('email').notNullable().unique();
-        table.string('password').notNullable();
-        // Billy: change picture to imageUrl to specify that we are providing image url
-        table.string('imageUrl');
-        table.string('address').notNullable();
-        table.bigInteger('phoneNumber').notNullable();
-    });
-}
+        return knex.schema.createTable('users', function (table) {
+            table.increments('id');
+            table.string('firstName').notNullable();
+            table.string('lastName').notNullable();
+            table.string('email').notNullable().unique();
+            table.string('password').notNullable();
+            table.string('imageUrl');
+            table.string('address').notNullable();
+            table.bigInteger('phoneNumber').notNullable();
+        });
+    }
 
-function createChefsTable () {
-    return knex.schema.createTable('chefs', function (table) {
-        table.increments('id');
-        table.string('firstName').notNullable();
-        table.string('lastName').notNullable();
-        table.string('email').notNullable().unique();
-        table.string('password').notNullable();
-        // Billy: change picture to imageUrl to specify that we are providing image url
-        table.string('imageUrl').notNullable();
-        table.string('description').notNullable();
-        table.bigInteger('phoneNumber').notNullable();
-        // Billy: hourly rate is an integer, in cents
-        table.integer('hourlyRateInCents').notNullable();
-    });
-}
+    function createChefsTable () {
+        return knex.schema.createTable('chefs', function (table) {
+            table.increments('id');
+            table.string('firstName').notNullable();
+            table.string('lastName').notNullable();
+            table.string('email').notNullable().unique();
+            table.string('password').notNullable();
+            table.string('imageUrl').notNullable();
+            table.string('description').notNullable();
+            table.bigInteger('phoneNumber').notNullable();
+            table.integer('hourlyRateInCents').notNullable();
+        });
+    }
 
-function createOrdersTable () {
-    return knex.schema.createTable('orders', function (table) {
-        table.increments('id');
-        table.time('beginningTime');
-        table.time('endingTime');
-        table.integer('rating');
-        table.string('comment');
-        table.integer('userID');
-        table.integer('chefID');
-        table.integer('orderTotal');
-        table.foreign('userID').references('users.id');
-        table.foreign('chefID').references('chefs.id');
-    });
-}
+    function createOrdersTable () {
+        return knex.schema.createTable('orders', function (table) {
+            table.increments('id');
+            table.time('beginningTime');
+            table.time('endingTime');
+            table.integer('rating');
+            table.string('comment');
+            table.integer('userID');
+            table.integer('chefID');
+            table.integer('orderTotal');
+            table.foreign('userID').references('users.id');
+            table.foreign('chefID').references('chefs.id');
+        });
+    }
 
-function createRecipesTable () {
-    return knex.schema.createTable('recipes', function (table) {
-        table.increments('id');
-        table.string('name').notNullable();
-        table.integer('cookingTime').notNullable();
-        // Billy: change picture to imageUrl to specify that we are providing image url
-        table.string('imageUrl').notNullable();
-        table.string('intolerances');
-        table.string('cuisine').notNullable();
-        table.string('cookingSteps');
-    });
-}
+    function createRecipesTable () {
+        return knex.schema.createTable('recipes', function (table) {
+            table.increments('id');
+            table.string('name').notNullable();
+            table.integer('cookingTime').notNullable();
+            table.string('imageUrl').notNullable();
+            table.string('intolerances');
+            table.string('cuisine').notNullable();
+            table.string('cookingSteps');
+        });
+    }
 
-function createIngredientsTable () {
-    return knex.schema.createTable('ingredients', function (table) {
-        table.increments('id');
-        table.string('name');
-    });
-}
+    function createIngredientsTable () {
+        return knex.schema.createTable('ingredients', function (table) {
+            table.increments('id');
+            table.string('name');
+        });
+    }
 
-function createRecipeIngredientsTable () {
-    return knex.schema.createTable('recipe_ingredients', function (table) {
-        table.float('amount');
-        table.integer('ingredientID');
-        table.integer('recipeID');
-        // measuring unit moved to recipe_ingredients to allow different recipe to have different units for the same ingredient
-        table.string('measuringUnit');
-        table.foreign('ingredientID').references('ingredients.id');
-        table.foreign('recipeID').references('recipes.id');
-    });
-}
+    function createRecipeIngredientsTable () {
+        return knex.schema.createTable('recipe_ingredients', function (table) {
+            table.float('amount');
+            table.integer('ingredientID');
+            table.integer('recipeID');
+            table.string('measuringUnit');
+            table.foreign('ingredientID').references('ingredients.id');
+            table.foreign('recipeID').references('recipes.id');
+        });
+    }
 
-function createOrderRecipesTable () {
-    return knex.schema.createTable('order_recipes', function (table) {
-        table.integer('rating');
-        table.string('comment');
-        table.integer('orderID');
-        table.integer('recipeID');
-        table.foreign('orderID').references('orders.id');
-        table.foreign('recipeID').references('recipes.id');
-    });
-}
+    function createOrderRecipesTable () {
+        return knex.schema.createTable('order_recipes', function (table) {
+            table.integer('rating');
+            table.string('comment');
+            table.integer('orderID');
+            table.integer('recipeID');
+            table.foreign('orderID').references('orders.id');
+            table.foreign('recipeID').references('recipes.id');
+        });
+    }
 
-function createChefRecipesTable () {
-    return knex.schema.createTable('chef_recipes', function(table) {
-        table.integer('chefID');
-        table.integer('recipeID');
-        table.foreign('chefID').references('chefs.id');
-        table.foreign('recipeID').references('recipes.id');
-    });
-}
+    function createChefRecipesTable () {
+        return knex.schema.createTable('chef_recipes', function(table) {
+            table.integer('chefID');
+            table.integer('recipeID');
+            table.foreign('chefID').references('chefs.id');
+            table.foreign('recipeID').references('recipes.id');
+        });
+    }
 
-function createRecipeIntolerancesTable () {
-    return knex.schema.createTable('recipe_intolerances', function(table) {
-        table.string('intolerance');
-        table.integer('recipeID');
-        table.foreign('recipeID').references('recipes.id');
-    });
-}
+    function createRecipeIntolerancesTable () {
+        return knex.schema.createTable('recipe_intolerances', function(table) {
+            table.string('intolerance');
+            table.integer('recipeID');
+            table.foreign('recipeID').references('recipes.id');
+        });
+    }
 
-function createRecipeEquipmentsTable () {
-    return knex.schema.createTable('recipe_equipments', function(table) {
-        table.string('equipment');
-        table.integer('recipeID');
-        table.foreign('recipeID').references('recipes.id');
-    });
-}
+    function createRecipeEquipmentsTable () {
+        return knex.schema.createTable('recipe_equipments', function(table) {
+            table.string('equipment');
+            table.integer('recipeID');
+            table.foreign('recipeID').references('recipes.id');
+        });
+    }
 
-function createRecipeDietaryRestrictionsTable () {
-    return knex.schema.createTable('recipe_dietaryRestrictions', function(table) {
-        table.string('dietaryRestriction');
-        table.integer('recipeID');
-        table.foreign('recipeID').references('recipes.id');
-    });
-}
+    function createRecipeDietaryRestrictionsTable () {
+        return knex.schema.createTable('recipe_dietaryRestrictions', function(table) {
+            table.string('dietaryRestriction');
+            table.integer('recipeID');
+            table.foreign('recipeID').references('recipes.id');
+        });
+    }
 
 };
 
