@@ -47,7 +47,7 @@ exports.up = function(knex, Promise) {
             table.increments('id');
             table.dateTime('beginningDateTime');
             table.dateTime('endingDateTime');
-            table.integer('rating');
+            table.integer('ratingOrder');
             table.string('comment');
             table.integer('userID');
             table.integer('chefID');
@@ -96,7 +96,7 @@ exports.up = function(knex, Promise) {
 
     function createOrderRecipesTable () {
         return knex.schema.createTable('order_recipes', function (table) {
-            table.integer('rating');
+            table.integer('ratingRecipe');
             table.string('comment');
             table.integer('orderID');
             table.integer('recipeID');

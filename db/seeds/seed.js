@@ -35,19 +35,19 @@ exports.seed = function(knex, Promise) {
             knex('ingredients').insert([{ id: 11, name: 'salsa'}]),
             knex('ingredients').insert([{ id: 12, name: 'water'}]),
 
+          ]);
+        })
+      .then(function () {
+        // A promise then call to create tables with reference IDs
+        return Promise.all([
             knex('chef_recipes').insert([{ chefID: 1, recipeID: 2 }]),
             knex('chef_recipes').insert([{ chefID: 2, recipeID: 1 }]),
             knex('chef_recipes').insert([{ chefID: 2, recipeID: 2 }]),
 
-            knex('orders').insert([{ id: 1, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 5, comment: "Delivered on time, great service, nice chef!", userID: 1, chefID: 1, orderTotal: 10000 }]),
-            knex('orders').insert([{ id: 2, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 3, comment: "Great service, nice guy!", userID: 2, chefID: 1, orderTotal: 10000 }]),
-            knex('orders').insert([{ id: 3, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 3, comment: "Delivered on time, great service, a bit pricey.", userID: 1, chefID: 2, orderTotal: 12000 }]),
-            knex('orders').insert([{ id: 4, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 4, comment: "Will definitely find him again!", userID: 2, chefID: 2, orderTotal: 12000 }]),
-
-            // knex('order_recipes').insert([{ rating: 4, comment: "a bit salty", orderID: 1, recipeID: 1}]),
-            // knex('order_recipes').insert([{ rating: 3, comment: "Tasty stuffs!", orderID: 2, recipeID: 2}]),
-            // knex('order_recipes').insert([{ rating: 5, comment: "Just so so.", orderID: 3, recipeID: 2}]),
-            // knex('order_recipes').insert([{ rating: 2, comment: "Nice!", orderID: 4, recipeID: 2}]),
+            knex('orders').insert([{ id: 1, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", ratingOrder: 5, comment: "Delivered on time, great service, nice chef!", userID: 1, chefID: 1, orderTotal: 10000 }]),
+            knex('orders').insert([{ id: 2, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", ratingOrder: 3, comment: "Great service, nice guy!", userID: 2, chefID: 1, orderTotal: 10000 }]),
+            knex('orders').insert([{ id: 3, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", ratingOrder: 3, comment: "Delivered on time, great service, a bit pricey.", userID: 1, chefID: 2, orderTotal: 12000 }]),
+            knex('orders').insert([{ id: 4, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", ratingOrder: 4, comment: "Will definitely find him again!", userID: 2, chefID: 2, orderTotal: 12000 }]),
 
             knex('recipe_dietaryRestrictions').insert([{ recipeID: 1, dietaryRestriction: "vegetarian" }]),
             knex('recipe_dietaryRestrictions').insert([{ recipeID: 1, dietaryRestriction: "vegan" }]),
@@ -70,15 +70,15 @@ exports.seed = function(knex, Promise) {
             knex('recipe_ingredients').insert([{ ingredientID: 10, recipeID: 2, amount: 0.75, measuringUnit: 'lb' }]),
             knex('recipe_ingredients').insert([{ ingredientID: 11, recipeID: 2, amount: 16, measuringUnit: 'oz' }]),
             knex('recipe_ingredients').insert([{ ingredientID: 12, recipeID: 2, amount: 2, measuringUnit: 'c' }])
-
-          ]);
-        })
+        ]);
+      })
       .then(function () {
+        // Another promise then call to create order_recipe which reference order ID.
         return Promise.all([
-            knex('order_recipes').insert([{ rating: 4, comment: "a bit salty", orderID: 1, recipeID: 1}]),
-            knex('order_recipes').insert([{ rating: 3, comment: "Tasty stuffs!", orderID: 2, recipeID: 2}]),
-            knex('order_recipes').insert([{ rating: 5, comment: "Just so so.", orderID: 3, recipeID: 2}]),
-            knex('order_recipes').insert([{ rating: 2, comment: "Nice!", orderID: 4, recipeID: 2}]),
+            knex('order_recipes').insert([{ ratingRecipe: 4, comment: "a bit salty", orderID: 1, recipeID: 1}]),
+            knex('order_recipes').insert([{ ratingRecipe: 3, comment: "Tasty stuffs!", orderID: 2, recipeID: 2}]),
+            knex('order_recipes').insert([{ ratingRecipe: 5, comment: "Just so so.", orderID: 3, recipeID: 2}]),
+            knex('order_recipes').insert([{ ratingRecipe: 2, comment: "Nice!", orderID: 4, recipeID: 2}]),
         ]);
       })
 };
