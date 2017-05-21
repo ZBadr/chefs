@@ -21,6 +21,8 @@ exports.up = function(knex, Promise) {
             table.string('imageUrl');
             table.string('address').notNullable();
             table.bigInteger('phoneNumber').notNullable();
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -35,6 +37,8 @@ exports.up = function(knex, Promise) {
             table.string('description').notNullable();
             table.bigInteger('phoneNumber').notNullable();
             table.integer('hourlyRateInCents').notNullable();
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -50,6 +54,8 @@ exports.up = function(knex, Promise) {
             table.integer('orderTotal');
             table.foreign('userID').references('users.id');
             table.foreign('chefID').references('chefs.id');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -57,11 +63,12 @@ exports.up = function(knex, Promise) {
         return knex.schema.createTable('recipes', function (table) {
             table.increments('id');
             table.string('name').notNullable();
-            table.integer('cookingTime').notNullable();
+            table.integer('cookingTimeInMinutes').notNullable();
             table.string('imageUrl').notNullable();
-            table.string('intolerances');
             table.string('cuisine').notNullable();
             table.string('cookingSteps');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -69,6 +76,8 @@ exports.up = function(knex, Promise) {
         return knex.schema.createTable('ingredients', function (table) {
             table.increments('id');
             table.string('name');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -80,6 +89,8 @@ exports.up = function(knex, Promise) {
             table.string('measuringUnit');
             table.foreign('ingredientID').references('ingredients.id');
             table.foreign('recipeID').references('recipes.id');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -91,6 +102,8 @@ exports.up = function(knex, Promise) {
             table.integer('recipeID');
             table.foreign('orderID').references('orders.id');
             table.foreign('recipeID').references('recipes.id');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -100,6 +113,8 @@ exports.up = function(knex, Promise) {
             table.integer('recipeID');
             table.foreign('chefID').references('chefs.id');
             table.foreign('recipeID').references('recipes.id');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -108,6 +123,8 @@ exports.up = function(knex, Promise) {
             table.string('intolerance');
             table.integer('recipeID');
             table.foreign('recipeID').references('recipes.id');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -116,6 +133,8 @@ exports.up = function(knex, Promise) {
             table.string('equipment');
             table.integer('recipeID');
             table.foreign('recipeID').references('recipes.id');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 
@@ -124,6 +143,8 @@ exports.up = function(knex, Promise) {
             table.string('dietaryRestriction');
             table.integer('recipeID');
             table.foreign('recipeID').references('recipes.id');
+            table.timestamp('createdAt').defaultTo(knex.fn.now());
+            table.timestamp('updatedAt').defaultTo(knex.fn.now());;
         });
     }
 

@@ -16,8 +16,8 @@ exports.seed = function(knex, Promise) {
                   knex('chefs').insert([{ id: 1, firstName: 'Jane', lastName: 'Doe', email: 'janedoe@gmail.com', password: 'janedoe', imageUrl: 'www.imgChefs1.com', description: "I am a good Cook", phoneNumber: 0987654321, hourlyRateInCents: 5000,}]),
                   knex('chefs').insert([{ id: 2, firstName: 'Katy', lastName: 'Perry', email: 'kateperry@gmail.com', password: 'katyperry', imageUrl: 'www.imgChefs2.com', description: "I am a good Cook", phoneNumber: 1234567899, hourlyRateInCents: 6500}]),
 
-                  knex('recipes').insert([{ id: 1, name: 'Spinach & chickpea curry', imageUrl: 'https://spoonacular.com/recipeImages/Spinach---chickpea-curry-217425.jpg', cookingTime: 15, cuisine: 'indian' }]),
-                  knex('recipes').insert([{ id: 2, name: 'Slow Cooker Mexican Beans and Rice with Pork', imageUrl: 'https://spoonacular.com/recipeImages/Slow-Cooker-Mexican-Beans-and-Rice-with-Pork-617250.jpg', cookingTime: 300, cuisine: 'mexican' }]),
+                  knex('recipes').insert([{ id: 1, name: 'Spinach & chickpea curry', imageUrl: 'https://spoonacular.com/recipeImages/Spinach---chickpea-curry-217425.jpg', cookingTimeInMinutes: 15, cuisine: 'indian' }]),
+                  knex('recipes').insert([{ id: 2, name: 'Slow Cooker Mexican Beans and Rice with Pork', imageUrl: 'https://spoonacular.com/recipeImages/Slow-Cooker-Mexican-Beans-and-Rice-with-Pork-617250.jpg', cookingTimeInMinutes: 300, cuisine: 'mexican' }]),
 
                   knex('ingredients').insert([{ id: 1, name: 'baby spinach'}]),
                   knex('ingredients').insert([{ id: 2, name: 'basmati rice'}]),
@@ -58,6 +58,7 @@ exports.seed = function(knex, Promise) {
                   knex('recipe_ingredients').insert([{ ingredientID: 11, recipeID: 2, amount: 16, measuringUnit: 'oz' }]),
                   knex('recipe_ingredients').insert([{ ingredientID: 12, recipeID: 2, amount: 2, measuringUnit: 'c' }])
 
+                  //knex('orders').insert([{ beginningTime: }])
                 ]);
               });
 };
