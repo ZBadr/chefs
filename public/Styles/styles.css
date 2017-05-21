@@ -1,0 +1,56 @@
+header,footer,
+article,section,
+hgroup,nav,
+figure{
+	display:block;
+}
+
+html{
+  background: url(../Images/free-chef-vector.jpg) center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+}
+
+/*navbar{
+	padding:0 5px;
+	position:absolute;
+	right:0;
+	top:4em;
+
+	border:1px solid #FCFCFC;
+
+	-moz-box-shadow:0 1px 1px #333333;
+	-webkit-box-shadow:0 1px 1px #333333;
+	box-shadow:0 1px 1px #333333;
+}*/
+
+main{
+  width: 150px;
+  float: right;
+  padding:30px;
+}
+
+
+loginandsignup{
+    background-color: white;
+    width: 50px;
+    padding:100px 2em 2em 2em;
+    border-color: black;
+	margin:3em;
+	padding:20px;
+}
+
+.loginandsignup .line{
+    border-bottom-color: black;
+}
+
+.loginandsignup h2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: darkgreen;
+}
+
+
+
+
