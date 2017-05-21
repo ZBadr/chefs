@@ -45,8 +45,8 @@ exports.up = function(knex, Promise) {
     function createOrdersTable () {
         return knex.schema.createTable('orders', function (table) {
             table.increments('id');
-            table.time('beginningTime');
-            table.time('endingTime');
+            table.dateTime('beginningDateTime');
+            table.dateTime('endingDateTime');
             table.integer('rating');
             table.string('comment');
             table.integer('userID');

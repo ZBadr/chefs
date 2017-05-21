@@ -36,6 +36,11 @@ exports.seed = function(knex, Promise) {
                   knex('chef_recipes').insert([{ chefID: 2, recipeID: 1 }]),
                   knex('chef_recipes').insert([{ chefID: 2, recipeID: 2 }]),
 
+                  knex('orders').insert([{ beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 5, comment: "Great dish, delivered on time, great service, nice chef!", userID: 1, chefID: 1, orderTotal: 10000 }]),
+                  knex('orders').insert([{ beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 3, comment: "The dish was OK, great service, nice guy!", userID: 2, chefID: 1, orderTotal: 10000 }]),
+                  knex('orders').insert([{ beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 3, comment: "Delivered on time, great service, a bit pricey", userID: 1, chefID: 2, orderTotal: 12000 }]),
+                  knex('orders').insert([{ beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 4, comment: "Will definite find him again!", userID: 2, chefID: 2, orderTotal: 12000 }]),
+
                   knex('recipe_dietaryRestrictions').insert([{ recipeID: 1, dietaryRestriction: "vegetarian" }]),
                   knex('recipe_dietaryRestrictions').insert([{ recipeID: 1, dietaryRestriction: "vegan" }]),
 
