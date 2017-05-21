@@ -45,7 +45,7 @@ exports.seed = function(knex, Promise) {
             knex('orders').insert([{ id: 4, beginningDateTime: "2017-05-21 12:00:00", endingDateTime: "2017-05-21 14:00:00", rating: 4, comment: "Will definitely find him again!", userID: 2, chefID: 2, orderTotal: 12000 }]),
 
             // knex('order_recipes').insert([{ rating: 4, comment: "a bit salty", orderID: 1, recipeID: 1}]),
-            // knex('order_recipes').insert([{ rating: 3, comment: "Tasty stuffs!", orderID: 2, recipeID: 1}]),
+            // knex('order_recipes').insert([{ rating: 3, comment: "Tasty stuffs!", orderID: 2, recipeID: 2}]),
             // knex('order_recipes').insert([{ rating: 5, comment: "Just so so.", orderID: 3, recipeID: 2}]),
             // knex('order_recipes').insert([{ rating: 2, comment: "Nice!", orderID: 4, recipeID: 2}]),
 
@@ -72,5 +72,13 @@ exports.seed = function(knex, Promise) {
             knex('recipe_ingredients').insert([{ ingredientID: 12, recipeID: 2, amount: 2, measuringUnit: 'c' }])
 
           ]);
-        });
+        })
+      .then(function () {
+        return Promise.all([
+            knex('order_recipes').insert([{ rating: 4, comment: "a bit salty", orderID: 1, recipeID: 1}]),
+            knex('order_recipes').insert([{ rating: 3, comment: "Tasty stuffs!", orderID: 2, recipeID: 2}]),
+            knex('order_recipes').insert([{ rating: 5, comment: "Just so so.", orderID: 3, recipeID: 2}]),
+            knex('order_recipes').insert([{ rating: 2, comment: "Nice!", orderID: 4, recipeID: 2}]),
+        ]);
+      })
 };
