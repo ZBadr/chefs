@@ -10,15 +10,14 @@ exports.seed = function(knex, Promise) {
               .then(() => { return knex('users').del() })
               .then(function () {
                 return Promise.all([
-                  knex('users').insert([{ firstName: 'John', lastName: 'Smith', email: 'johnsmith@gmail.com', password: 'johnsmith', picture: 'www.imgUser1.com', address: "3439 Yonge Street, Toronto", phoneNumber: 3243233242}]),
-                  knex('users').insert([{ firstName: 'Barry', lastName: 'White', email: 'barrywhite@gmail.com', password: 'barrywhite', picture: 'www.imgUser2.com', address: "34 Bloor Street, Toronto", phoneNumber: 1231231234}]),
+                  knex('users').insert([{ firstName: 'John', lastName: 'Smith', email: 'johnsmith@gmail.com', password: 'johnsmith', imageUrl: 'www.imgUser1.com', address: "3439 Yonge Street, Toronto", phoneNumber: 3243233242}]),
+                  knex('users').insert([{ firstName: 'Barry', lastName: 'White', email: 'barrywhite@gmail.com', password: 'barrywhite', imageUrl: 'www.imgUser2.com', address: "34 Bloor Street, Toronto", phoneNumber: 1231231234}]),
 
-                  knex('chefs').insert([{ id: 1, firstName: 'Jane', lastName: 'Doe', email: 'janedoe@gmail.com', password: 'janedoe', picture: 'www.imgChefs1.com', description: "I am a good Cook", phoneNumber: 0987654321}]),
-                  knex('chefs').insert([{ id: 2, firstName: 'Katy', lastName: 'Perry', email: 'kateperry@gmail.com', password: 'katyperry', picture: 'www.imgChefs2.com', description: "I am a good Cook", phoneNumber: 1234567899}]),
+                  knex('chefs').insert([{ id: 1, firstName: 'Jane', lastName: 'Doe', email: 'janedoe@gmail.com', password: 'janedoe', imageUrl: 'www.imgChefs1.com', description: "I am a good Cook", phoneNumber: 0987654321, hourlyRateInCents: 5000,}]),
+                  knex('chefs').insert([{ id: 2, firstName: 'Katy', lastName: 'Perry', email: 'kateperry@gmail.com', password: 'katyperry', imageUrl: 'www.imgChefs2.com', description: "I am a good Cook", phoneNumber: 1234567899, hourlyRateInCents: 6500}]),
 
-                  knex('recipes').insert([{ id: 1, name: 'Spinach & chickpea curry', imgUrl: 'https://spoonacular.com/recipeImages/Spinach---chickpea-curry-217425.jpg', cookingTime: 15, cuisine: 'indian' }]),
-                  knex('recipes').insert([{ id: 2, name: 'Slow Cooker Mexican Beans and Rice with Pork', imgUrl: 'https://spoonacular.com/recipeImages/Slow-Cooker-Mexican-Beans-and-Rice-with-Pork-617250.jpg', cookingTime: 300, cuisine: 'mexican' }]),
-
+                  knex('recipes').insert([{ id: 1, name: 'Spinach & chickpea curry', imageUrl: 'https://spoonacular.com/recipeImages/Spinach---chickpea-curry-217425.jpg', cookingTime: 15, cuisine: 'indian' }]),
+                  knex('recipes').insert([{ id: 2, name: 'Slow Cooker Mexican Beans and Rice with Pork', imageUrl: 'https://spoonacular.com/recipeImages/Slow-Cooker-Mexican-Beans-and-Rice-with-Pork-617250.jpg', cookingTime: 300, cuisine: 'mexican' }]),
 
                   knex('ingredients').insert([{ id: 1, name: 'baby spinach'}]),
                   knex('ingredients').insert([{ id: 2, name: 'basmati rice'}]),
@@ -37,11 +36,14 @@ exports.seed = function(knex, Promise) {
                   knex('chef_recipes').insert([{ chefID: 2, recipeID: 1 }]),
                   knex('chef_recipes').insert([{ chefID: 2, recipeID: 2 }]),
 
-                  // knex('recipe_dietaryRestrictions').insert([{ recipe_id: 1, restriction: "vegetarian" }]),
-                  // knex('recipe_dietaryRestrictions').insert([{ recipe_id: 1, restriction: "vegan" }]),
+                  knex('recipe_dietaryRestrictions').insert([{ recipeID: 1, dietaryRestriction: "vegetarian" }]),
+                  knex('recipe_dietaryRestrictions').insert([{ recipeID: 1, dietaryRestriction: "vegan" }]),
 
-                  // knex('recipe_intolerances').insert([{ recipe_id: 1, restriction: "GlutenFree" }]),
-                  // knex('recipe_intolerances').insert([{ recipe_id: 1, restriction: "DairyFree" }]),
+                  knex('recipe_intolerances').insert([{ recipeID: 1, intolerance: "GlutenFree" }]),
+                  knex('recipe_intolerances').insert([{ recipeID: 1, intolerance: "DairyFree" }]),
+
+                  knex('recipe_equipments').insert([{ recipeID: 1, equipment: "frying pan" }]),
+                  knex('recipe_equipments').insert([{ recipeID: 2, equipment: "slow cooker" }]),
 
                   knex('recipe_ingredients').insert([{ ingredientID: 1, recipeID: 1, amount: 250, measuringUnit: 'g' }]),
                   knex('recipe_ingredients').insert([{ ingredientID: 2, recipeID: 2, amount: 4, measuringUnit: 'servings' }]),
@@ -55,6 +57,7 @@ exports.seed = function(knex, Promise) {
                   knex('recipe_ingredients').insert([{ ingredientID: 10, recipeID: 10, amount: 0.75, measuringUnit: 'lb' }]),
                   knex('recipe_ingredients').insert([{ ingredientID: 11, recipeID: 11, amount: 16, measuringUnit: 'oz' }]),
                   knex('recipe_ingredients').insert([{ ingredientID: 12, recipeID: 12, amount: 2, measuringUnit: 'c' }])
+
                 ]);
               });
 };

@@ -21,9 +21,10 @@ exports.up = function(knex, Promise) {
         table.string('lastName').notNullable();
         table.string('email').notNullable().unique();
         table.string('password').notNullable();
-        table.string('picture');
+        // Billy: change picture to imageUrl to specify that we are providing image url
+        table.string('imageUrl');
         table.string('address').notNullable();
-        table.integer('phoneNumber').notNullable();
+        table.bigInteger('phoneNumber').notNullable();
         table.string('allergies');
         table.string('dietaryRestrictions');
     });
@@ -35,10 +36,13 @@ function createChefsTable () {
         table.string('firstName').notNullable();
         table.string('lastName').notNullable();
         table.string('email').notNullable().unique();
-        table.string('picture').notNullable();
+        table.string('password').notNullable();
+        // Billy: change picture to imageUrl to specify that we are providing image url
+        table.string('imageUrl').notNullable();
         table.string('description').notNullable();
-        table.integer('phoneNumber').notNullable();
-        table.integer('hourlyRate').notNullable();
+        table.bigInteger('phoneNumber').notNullable();
+        // Billy: hourly rate is an integer, in cents
+        table.integer('hourlyRateInCents').notNullable();
     });
 }
 
@@ -62,7 +66,8 @@ function createRecipesTable () {
         table.increments('id');
         table.string('name').notNullable();
         table.integer('cookingTime').notNullable();
-        table.string('img').notNullable();
+        // Billy: change picture to imageUrl to specify that we are providing image url
+        table.string('imageUrl').notNullable();
         table.string('intolerances');
         table.string('cuisine').notNullable();
         table.string('cookingSteps');
@@ -73,15 +78,16 @@ function createIngredientsTable () {
     return knex.schema.createTable('ingredients', function (table) {
         table.increments('id');
         table.string('name');
-        table.string('measuringUnit');
     });
 }
 
 function createRecipeIngredientsTable () {
     return knex.schema.createTable('recipe_ingredients', function (table) {
-        table.integer('amount');
+        table.float('amount');
         table.integer('ingredientID');
         table.integer('recipeID');
+        // measuring unit moved to recipe_ingredients to allow different recipe to have different units for the same ingredient
+        table.string('measuringUnit');
         table.foreign('ingredientID').references('ingredients.id');
         table.foreign('recipeID').references('recipes.id');
     });
@@ -109,7 +115,7 @@ function createChefRecipesTable () {
 
 function createRecipeIntolerancesTable () {
     return knex.schema.createTable('recipe_intolerances', function(table) {
-        table.string('intolerances');
+        table.string('intolerance');
         table.integer('recipeID');
         table.foreign('recipeID').references('recipes.id');
     });
@@ -117,7 +123,7 @@ function createRecipeIntolerancesTable () {
 
 function createRecipeEquipmentsTable () {
     return knex.schema.createTable('recipe_equipments', function(table) {
-        table.string('equipments');
+        table.string('equipment');
         table.integer('recipeID');
         table.foreign('recipeID').references('recipes.id');
     });
@@ -125,12 +131,12 @@ function createRecipeEquipmentsTable () {
 
 function createRecipeDietaryRestrictionsTable () {
     return knex.schema.createTable('recipe_dietaryRestrictions', function(table) {
-        table.string('dietaryRestrictions');
+        table.string('dietaryRestriction');
         table.integer('recipeID');
         table.foreign('recipeID').references('recipes.id');
     });
 }
-  
+
 };
 
 exports.down = function(knex, Promise) {
@@ -145,7 +151,7 @@ exports.down = function(knex, Promise) {
     .then(dropOrders)
     .then(dropChefs)
     .then(dropUsers);
-    
+
 
     function dropUsers () {
         return knex.schema.dropTableIfExists('users')
@@ -189,5 +195,5 @@ exports.down = function(knex, Promise) {
     function dropRecipeDietaryRestrictionsTable () {
         return knex.schema.dropTableIfExists('recipe_dietaryRestrictions')
     }
-  
+
 };
