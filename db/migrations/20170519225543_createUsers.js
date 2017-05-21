@@ -25,8 +25,6 @@ exports.up = function(knex, Promise) {
         table.string('imageUrl');
         table.string('address').notNullable();
         table.bigInteger('phoneNumber').notNullable();
-        table.string('allergies');
-        table.string('dietaryRestrictions');
     });
 }
 
