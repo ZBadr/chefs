@@ -17,7 +17,7 @@ const LoginSignup = () => (
                 </form>
 
             <h2>Signup</h2>
-                <form action="/login" method="POST">
+                <form action="/signup" method="POST">
                 <textarea id = "textarea" name="firstName" placeholder="First Name"></textarea>
                 <textarea id = "textarea" name="lastName" placeholder="LastName"></textarea>
                 <textarea id = "textarea" name="email" placeholder="Email"></textarea>
