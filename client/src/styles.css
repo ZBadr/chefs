@@ -5,13 +5,13 @@ figure{
 	display:block;
 }
 
-html{
-  background: url(../Images/free-chef-vector.jpg) center center fixed; 
+/*html{
+  background: url(../public/free-chef-vector.jpg) center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; 
-}
+}*/
 
 /*navbar{
 	padding:0 5px;
@@ -27,6 +27,7 @@ html{
 }*/
 
 main{
+  background-image: url("free-chef-vector.jpg");
   width: 150px;
   float: right;
   padding:30px;
@@ -43,6 +44,7 @@ loginandsignup{
 }
 
 .loginandsignup .line{
+    border-style: solid;
     border-bottom-color: black;
 }
 

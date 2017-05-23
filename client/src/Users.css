@@ -1,0 +1,28 @@
+.navbar{
+  background-color: gray;
+  height: 75px;
+}
+
+.info{
+  border-style: double;
+  border-color: black;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.info .info-email{
+  color: red;
+}
+
+.order-summary{
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+  padding: 1em;
+  height: 100%;
+}
+
+.order{
+  border-style: dashed;
+  border-color: grey;
+}
