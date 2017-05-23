@@ -1,23 +1,12 @@
 import React from 'react';
-import './LoginSignup.css';
+import './ChefReg.css';
 
 
-const LoginSignup = () => (
+const ChefReg = () => (
   <div>
-     <main className="main">
-
-        <section className="loginandsignup">
-
-            <h2>Login</h2>
-                <form action="/login" method="POST">
-                <textarea id = "textarea" name="email" placeholder="Email"></textarea>
-                <textarea id = "textarea" name="password" placeholder="Password"></textarea>
-                <input id="submit" type="submit" />
-                <p className="error"></p>
-                </form>
-
-            <h2>Signup</h2>
-                <form action="/login" method="POST">
+     <section className="main">
+            <h2>Chef Registration</h2>
+                <form action="/chefreg" method="POST">
                 <textarea id = "textarea" name="firstName" placeholder="First Name"></textarea>
                 <textarea id = "textarea" name="lastName" placeholder="LastName"></textarea>
                 <textarea id = "textarea" name="email" placeholder="Email"></textarea>
@@ -25,13 +14,12 @@ const LoginSignup = () => (
                 <textarea id = "textarea" name="passwordConfirmation" placeholder="Password Confirmation"></textarea>
                 <textarea id = "textarea" name="address" placeholder="Address"></textarea>
                 <textarea id = "textarea" name="phone" placeholder="Phone #"></textarea>
+                <textarea id = "cd" name="description" placeholder="Cooking background/description"></textarea>
                 <input id="submit" type="submit" />
-                <p className="error"></p>
+                <p class="error"></p>
                 </form>
         </section>
-
-    </main>
   </div>
 )
 
-export default LoginSignup;
+export default ChefReg;

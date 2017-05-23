@@ -5,7 +5,6 @@ import {
   Link
 } from 'react-router-dom'
 import './App.css';
-import './Users.css';
 import Home from './Home.js';
 import LoginSignup from './LoginSignup.js';
 import Recipe from './Recipe.js';
@@ -14,6 +13,7 @@ import Chef from './Chef.js';
 import Chefs from './Chefs.js';
 import CartList from './CartList.js';
 import Users from './Users.js';
+import ChefReg from './ChefReg.js';
 
 
 class App extends Component {
@@ -31,10 +31,11 @@ class App extends Component {
         <Router>
           <div>
             <nav className="navbar">
-              <span id="logo"><Link to = "/"><h1>Home Cooked</h1></Link></span>
-              <span className="nav-links"><Link to = "/user">Log In/Sign Up</Link></span>
-              <span className="nav-cart"><Link to="/cart">Cart</Link></span>
-              <span className="nav-cart"><Link to="/Users">Profile</Link></span>
+              <span id="logo"><Link to = "/"><h1> Home Cooked </h1></Link></span>
+              <span className="nav-links"><Link to = "/user"> Log In/Sign Up </Link></span>
+              <span className="nav-cart"><Link to="/cart"> Cart </Link></span>
+              <span className="nav-profile"><Link to="/Users"> Profile </Link></span>
+              <span className="nav-chefreg"><Link to="/chefreg"> Chef Registration </Link></span>
             </nav>
             <hr/>
             <Route exact path="/" component={Home}/>
@@ -45,6 +46,7 @@ class App extends Component {
             <Route exact path="/chef" component={Chefs}/>
             <Route path="/cart" component={CartList} cartItems={this.state.cartItems}/>
             <Route path="/Users" component={Users}/>
+            <Route path="/ChefReg" component={ChefReg}/>
           </div>
         </Router>
       </div>

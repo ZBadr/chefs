@@ -8,10 +8,8 @@ class Order extends Component {
         <span>Order Number</span>
         <div>Chef Name</div>
         <div>Order date/time</div>
-          <ul>
-            <li><a href="" className="recipe-link">Recipe 1 link and item price</a></li>
-            <li><a href="" className="recipe-link">Recipe 2 link and item price</a></li>
-          </ul>
+           <a href="" className="recipe-link">Recipe 1 link and item price</a>
+           <a href="" className="recipe-link">Recipe 2 link and item price</a>
         <div className="order-totalprice">Total order price</div>
       </div>
     );

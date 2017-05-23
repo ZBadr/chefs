@@ -1,0 +1,18 @@
+.main{
+  background-image: url("free-chef-vector.jpg");
+  width: 150px;
+  float: right;
+  padding:30px;
+}
+.loginandsignup{
+    border-color: darkgreen;
+}
+
+.loginandsignup h2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: darkgreen;
+}
+
+
+
+

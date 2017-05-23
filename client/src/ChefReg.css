@@ -1,0 +1,8 @@
+.main{
+    color: darkgreen;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-style: solid;
+    border-color: darkgreen;
+    border-radius: 10px;
+    float: right;
+}
