@@ -20,7 +20,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      cartItems: {name: "Young Chow Fried Rice", quantity: 1, price: 750}
+      cartItems: [{name: "Young Chow Fried Rice", quantity: 1, price: 750}]
     };
     // this.socket = new WebSocket("ws://localhost:3001");
   }
@@ -31,10 +31,10 @@ class App extends Component {
         <Router>
           <div>
             <nav className="navbar">
-              <span id="logo"><Link to = "/"><h1> Home Cooked </h1></Link></span>
-              <span className="nav-links"><Link to = "/user"> Log In/Sign Up </Link></span>
-              <span className="nav-cart"><Link to="/cart"> Cart </Link></span>
-              <span className="nav-profile"><Link to="/Users"> Profile </Link></span>
+              <span id="logo"><Link to = "/"><h1>Home Cooked</h1></Link></span>
+              <span className="nav-links"><Link to = "/user">Log In/Sign Up</Link></span>
+              <span className="nav-cart"><Link to="/cart">Cart({this.state.cartItems.length})</Link></span>
+              <span className="nav-profile"><Link to="/Users">Profile</Link></span>
               <span className="nav-chefreg"><Link to="/chefreg"> Chef Registration </Link></span>
             </nav>
             <hr/>
@@ -44,7 +44,7 @@ class App extends Component {
             <Route exact path="/recipe" component={Recipes}/>
             <Route path="/chef/:chefId" component={Chef} />
             <Route exact path="/chef" component={Chefs}/>
-            <Route path="/cart" component={CartList} cartItems={this.state.cartItems}/>
+            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} />} />
             <Route path="/Users" component={Users}/>
             <Route path="/ChefReg" component={ChefReg}/>
           </div>
