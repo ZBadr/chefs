@@ -1,33 +1,37 @@
 import React, {Component} from 'react';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
+import 'react-date-picker/index.css';
 
-import 'react-datepicker/dist/react-datepicker.css';
+import { DateField, DatePicker } from 'react-date-picker'
 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-class Calendar extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      startDate: moment()
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+class Cal extends Component {
+  render(){
 
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
-  }
+    // const onChange = (dateString, { dateMoment, timestamp }) => {
+    //       console.log(dateString)
+    //     }
 
-  render() {
-    return <DatePicker
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-    />;
+    return(
+        <DateField
+          dateFormat="YYYY-MM-DD"
+          forceValidDate={true}
+          defaultValue={1495561319090}
+          showClock={false}
+        >
+          <DatePicker
+            navigation={true}
+            locale="en"
+            forceValidDate={true}
+            highlightWeekends={true}
+            highlightToday={true}
+            weekNumbers={true}
+            weekStartDay={0}
+          />
+        </DateField>
+    );
   }
 }
 
-export default Calendar;
+
+
+export default Cal;

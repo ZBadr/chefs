@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Cart from './Cart.js'
-import Calendar from './Calendar.js';
+import Cal from './Calendar.js';
+import CartAddress from './CartAddress.js';
 
 class CartList extends Component {
   render() {
@@ -33,22 +34,12 @@ class CartList extends Component {
         <div>
           <h1>Address</h1>
           <form>
-            <h3>Same as home address?</h3>
-              <input type="checkbox" />
-              <input type="text" name="address1" placeholder="Address line 1" />
-              <input type="text" name="address2" placeholder="Address line 2 (optional)" />
-              <input type="text" name="city" placeholder="City" />
-              <input type="text" name="prov" placeholder="Province" />
-              <input type="text" name="country" placeholder="Country" />
-              <input type="text" name="postalCode" placeholder="Postal code" />
+            <CartAddress />
+            <div>
+              <h1>Delivery Time</h1>
+              <Cal />
+            </div>
           </form>
-        </div>
-
-        <div>
-          <h1>Delivery Time</h1>
-
-            <Calendar />
-
         </div>
       </div>
     );
