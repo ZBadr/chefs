@@ -4,12 +4,14 @@ import React, {Component} from 'react';
 class Cart extends Component {
   render() {
     return (
-      <tr className="cartItems">
-          <td className="cartItemName">Young Chow Fried Rice</td>
-          <td className="cartItemQuant">1</td>
-          <td className="cartItemPrice">7.50</td>
-          <td className="cartItemSubtotal">7.50</td>
+
+      <tr className="cartItem">
+        <td className="cartItemName">{this.props.cartItems.name}</td>
+        <td className="cartItemQuant">{this.props.cartItems.quantity}</td>
+        <td className="cartItemPrice">{this.props.cartItems.price}</td>
+        <td className="cartItemSubtotal">STILL MISSING</td>
       </tr>
+
     );
   }
 }

@@ -18,7 +18,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      cartItems: {name: "Young Chow Fried Rice", quantity: 1, price: 750}
+      cartItems: [{name: "Young Chow Fried Rice", quantity: 1, price: 750}]
     };
     // this.socket = new WebSocket("ws://localhost:3001");
   }
@@ -40,7 +40,7 @@ class App extends Component {
             <Route exact path="/recipe" component={Recipes}/>
             <Route path="/chef/:chefId" component={Chef} />
             <Route exact path="/chef" component={Chefs}/>
-            <Route path="/cart" component={CartList} cartItems={this.state.cartItems}/>
+            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} />} />
           </div>
         </Router>
       </div>
