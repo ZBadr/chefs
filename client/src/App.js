@@ -14,6 +14,8 @@ import Chefs from './Chefs.js';
 import CartList from './CartList.js';
 import Users from './Users.js';
 import ChefReg from './ChefReg.js';
+import ChefsProfile from './ChefsProfile.js';
+import OrderConfirmation from './OrderConfirmation.js';
 
 
 class App extends Component {
@@ -36,6 +38,8 @@ class App extends Component {
               <span className="nav-cart"><Link to="/cart">Cart({this.state.cartItems.length})</Link></span>
               <span className="nav-profile"><Link to="/Users">Profile</Link></span>
               <span className="nav-chefreg"><Link to="/chefreg"> Chef Registration </Link></span>
+              <span className="nav-chefsprofile"><Link to="/chefsprofile"> Chef Profile </Link></span>
+              <span className="nav-OrderConfirmation"><Link to="/OrderConfirmation"> Order Confirmation </Link></span>
             </nav>
             <hr/>
             <Route exact path="/" component={Home}/>
@@ -47,6 +51,8 @@ class App extends Component {
             <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} />} />
             <Route path="/Users" component={Users}/>
             <Route path="/ChefReg" component={ChefReg}/>
+            <Route path="/chefsprofile" component={ChefsProfile}/>
+            <Route path="/OrderConfirmation" component={OrderConfirmation}/>
           </div>
         </Router>
       </div>
