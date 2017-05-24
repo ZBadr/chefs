@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Cart from './Cart.js'
 import Cal from './Calendar.js';
 import CartAddress from './CartAddress.js';
+import TimePicker from 'react-bootstrap-time-picker';
 
 class CartList extends Component {
   render() {
@@ -25,7 +26,11 @@ class CartList extends Component {
             })}
           <tr>
             <th colSpan="3">TOTAL:</th>
-            <th>7.50</th>
+            <th>
+              {this.props.cartItems.map( (item) => {
+                return item.price * item.quantity;
+              }).reduce(( x, y ) => { return x + y ; } )}
+            </th>
           </tr>
           </tbody>
         </table>
@@ -37,6 +42,7 @@ class CartList extends Component {
             <CartAddress />
             <div>
               <h1>Delivery Time</h1>
+              <TimePicker start="10:00" end="21:00" step={30} />
               <Cal />
             </div>
           </form>
