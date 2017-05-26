@@ -34,9 +34,9 @@ class App extends Component {
             <nav className="navbar">
               <span id="logo"><Link to = "/"><h1>Home Cooked</h1></Link></span>
               <span className="nav-links"><Link to = "/user">Log In/Sign Up</Link></span>
-              <span className="nav-cart"><Link to="/cart">Cart({this.state.cartItems.length})</Link></span>
-              <span className="nav-profile"><Link to="/Users">Profile</Link></span>
-              <span className="nav-chefreg"><Link to="/chefreg"> Chef Registration </Link></span>
+              <span className="nav-links"><Link to="/cart">Cart({this.state.cartItems.length})</Link></span>
+              <span className="nav-links"><Link to="/Users">Profile</Link></span>
+              <span className="nav-links"><Link to="/chefreg"> Chef Registration </Link></span>
             </nav>
             <hr/>
             <Route exact path="/" component={Home}/>
