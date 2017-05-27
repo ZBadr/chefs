@@ -4,7 +4,7 @@ import './LoginSignup.css';
 
 const LoginSignup = () => (
   <div>
-     <main className="main">
+     <main className="mainlogin">
 
         <section className="loginandsignup">
 

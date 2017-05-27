@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
   Link
 } from 'react-router-dom'
@@ -7,6 +8,7 @@ import {
 class Home extends Component {
   render() {
     return (
+      <MuiThemeProvider>
       <div className="Home">
 
           <form>
@@ -60,6 +62,7 @@ class Home extends Component {
           </Link>
 
       </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -1,8 +1,10 @@
 .main{
-    color: darkgreen;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-style: solid;
-    border-color: darkgreen;
-    border-radius: 10px;
-    float: right;
+  background-color:#E0E0E0;
+  border-style: solid;
+  border-color: #0D47A1;
+  color: #0D47A1;
+  border-radius: 10px;
+  margin-top: 2em;
+  width: 150px;
+  padding:30px;
 }
