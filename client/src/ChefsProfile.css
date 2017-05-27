@@ -3,15 +3,11 @@
   height: 75px;
 }
 
-.info{
+.chefsinfo{
   border-style: double;
   border-color: black;
   border-radius: 10px;
   padding: 1em;
-}
-
-.info .info-email{
-  color: red;
 }
 
 .order-summary{

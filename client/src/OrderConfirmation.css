@@ -1,0 +1,55 @@
+.orderConfirmation{
+    align-content: left;
+}
+
+.names{
+    margin: 1em;
+    padding: 1em;
+    text-align: left;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 10px;
+}
+
+.orderItems{
+    margin: 1em;
+    padding: 1em;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 10px;
+}
+
+.orderItems #items{
+    float: left;
+}
+
+.orderItems #prices{
+    float: right;
+}
+
+.address{
+    margin: 1em;
+    padding: 1em;
+    text-align: left;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 10px;
+}
+
+.timeAndDate{
+    margin: 1em;
+    padding: 1em;
+    text-align: left;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 10px;
+}
+
+.comments{
+    margin: 1em;
+    padding: 1em;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+}
+

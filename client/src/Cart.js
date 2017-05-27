@@ -11,6 +11,9 @@ class Cart extends Component {
     this.props.changeQuant = +1
   }
   render() {
+
+    let subTotal = this.props.cartItems.quantity * this.props.cartItems.price;
+
     return (
 
       <tr className="cartItem">
@@ -21,7 +24,7 @@ class Cart extends Component {
           <button name="increase-quantity" onClick={this.handleIncreaseQuant}>+</button>
         </td>
         <td className="cartItemPrice">{this.props.cartItems.price}</td>
-        <td className="cartItemSubtotal">STILL MISSING</td>
+        <td className="cartItemSubtotal">{subTotal}</td>
       </tr>
 
     );
