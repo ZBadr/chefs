@@ -31,6 +31,7 @@ class CartAddress extends Component {
   render() {
     return (
       <div className="CartAddress">
+      <h1>Address</h1>
         <div>
           <input type="button" value="Same as home address" onClick={this.handleButtonClick} />
         </div>

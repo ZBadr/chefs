@@ -26,6 +26,13 @@ class App extends Component {
     // this.socket = new WebSocket("ws://localhost:3001");
   }
 
+  handleCartChange = (e) => {
+
+
+
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -45,7 +52,7 @@ class App extends Component {
             <Route exact path="/recipe" component={Recipes}/>
             <Route path="/chef/:chefId" component={Chef} />
             <Route exact path="/chef" component={Chefs}/>
-            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} />} />
+            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} changeCartItems={this.handleCartChange}/>} />
             <Route path="/Users" component={Users}/>
             <Route path="/ChefReg" component={ChefReg}/>
           </div>

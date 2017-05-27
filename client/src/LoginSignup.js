@@ -9,7 +9,7 @@ const LoginSignup = () => (
         <section className="loginandsignup">
 
             <h2>Login</h2>
-                <form action="http://localhost:3001/login" method="post">
+                <form action="http://localhost:3000/login" method="post">
                     <div>
                     <label>Email:</label>
                     <input type="email" name="email"/><br/>
@@ -23,10 +23,10 @@ const LoginSignup = () => (
                     </div>
                 </form>
 
-        <div class="line"></div>
+        <div className="line"></div>
 
             <h2>Sign Up</h2>
-                <form action="http://localhost:3001/signup" method="POST">
+                <form action="http://localhost:3000/signup" method="POST">
                         <div>
                     <label>First Name:</label>
                     <input type="text" name="firstName"/><br/>
@@ -58,10 +58,6 @@ const LoginSignup = () => (
                     <div>
                     <input type="submit" value="Submit"/>
                     </div>
-                </form>
-
-                <form method="GET" action="http://localhost:3001/ping">
-                <input type="submit" value="Ping" />
                 </form>
 
         </section>
