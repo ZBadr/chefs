@@ -85,25 +85,6 @@ class Home extends Component {
           <Link to = "/chef">
             <h5>more chefs</h5>
           </Link>
-
-          <form id="login-form" onSubmit={this.handleFormSubmit}>
-            <div>
-            <label>Email:</label>
-            <input type="email" name="email"/><br/>
-            </div>
-            <div>
-            <label>Password:</label>
-            <input type="password" name="password"/>
-            </div>
-            <div>
-            <input type="submit" value="Submit"/>
-            </div>
-          </form>
-
-
-
-
-
       </div>
       </MuiThemeProvider>
     );

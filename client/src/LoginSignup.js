@@ -2,50 +2,43 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import './LoginSignup.css';
 
-
-
 class LoginSignup extends Component {
+
     handleFormSubmit = (e) => {
         e.preventDefault();
-        let oReq = new XMLHttpRequest();
-        oReq.open("post", )
-
-
-
-        let payload = new FormData(document.getElementById("login-form"));
-        console.log(payload);
-        fetch('/login', {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: payload
-        }).then((res) => {
-          // console.log(res);
-          if (res.status === 200) {
-            return <Redirect to="/user"/>
+        let email = document.getElementById('login-email').value;
+        let password = document.getElementById('login-password').value;
+        let oReq = new XMLHttpRequest(),
+            method = "POST",
+            url = "/login";
+        oReq.open(method, url);
+        oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        oReq.onreadystatechange = function () {
+          if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+            console.log(oReq.responseText);
           }
-        }).catch(err => console.error(err));
+        };
+
+        oReq.send(`email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
     }
+
     render(){
         return(
             <div>
              <main className="mainlogin">
-
                 <section className="loginandsignup">
-
                     <h2>Login</h2>
-                        <form id="login-form" onSubmit={this.handleFormSubmit}>
+                        <form id="login-form" onSubmit={this.handleFormSubmit} enctype="application/x-www-form-urlencoded">
                             <div>
                             <label>Email:</label>
-                            <input type="email" name="email"/><br/>
+                            <input type="email" name="email" id="login-email"/><br/>
                             </div>
                             <div>
                             <label>Password:</label>
-                            <input type="password" name="password"/>
+                            <input type="password" name="password" id="login-password"/>
                             </div>
                             <div>
-                            <input type="submit" value="Submit"/>
+                            <input type="submit" value="Submit" />
                             </div>
                         </form>
 
@@ -53,36 +46,36 @@ class LoginSignup extends Component {
 
                     <h2>Sign Up</h2>
                         <form action="http://localhost:3000/signup" method="POST">
-                                <div>
-                            <label>First Name:</label>
-                            <input type="text" name="firstName"/><br/>
+                            <div>
+                                <label>First Name:</label>
+                                <input type="text" name="firstName"/><br/>
                             </div>
                             <div>
-                            <label>Last Name:</label>
-                            <input type="text" name="lastName"/><br/>
+                                <label>Last Name:</label>
+                                <input type="text" name="lastName"/><br/>
                             </div>
                             <div>
-                            <label>Email:</label>
-                            <input type="email" name="email"/><br/>
+                                <label>Email:</label>
+                                <input type="email" name="email"/><br/>
                             </div>
                             <div>
-                            <label>Password:</label>
-                            <input type="password" name="password"/><br/>
+                                <label>Password:</label>
+                                <input type="password" name="password"/><br/>
                             </div>
                             <div>
-                            <label>Retype Password:</label>
-                            <input type="password" name="passwordConfirmation"/>
+                                <label>Retype Password:</label>
+                                <input type="password" name="passwordConfirmation"/>
                             </div>
                             <div>
-                            <label>Address:</label>
-                            <input type="text" name="address"/>
+                                <label>Address:</label>
+                                <input type="text" name="address"/>
                             </div>
                             <div>
-                            <label>Phone Number:</label>
-                            <input type="text" name="phoneNumber"/>
+                                <label>Phone Number:</label>
+                                <input type="text" name="phoneNumber"/>
                             </div>
                             <div>
-                            <input type="submit" value="Submit"/>
+                                <input type="submit" value="Submit"/>
                             </div>
                         </form>
 
