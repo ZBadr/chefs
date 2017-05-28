@@ -8,6 +8,7 @@
     "knex": "^0.13.0",
     "pg": "^6.2.2",
     "react": "^15.5.4",
+    "react-bootstrap-time-picker": "^1.0.3",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {},
