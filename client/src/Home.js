@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
-  Redirect,
   Link
 } from 'react-router-dom'
 
@@ -10,23 +9,7 @@ import {
 
 class Home extends Component {
 
-  // handleFormSubmit = (e) => {
-  //   e.preventDefault();
-  //   let payload = new FormData(document.getElementById("login-form"));
-  //   console.log(payload);
-  //   fetch('/login', {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded'
-  //     },
-  //     body: payload
-  //   }).then((res) => {
-  //     // console.log(res);
-  //     if (res.status === 200) {
-  //       return <Redirect to="/user"/>
-  //     }
-  //   }).catch(err => console.error(err));
-  // }
+
 
   // handlePingClick = (e) => {
   //   e.preventDefault();
@@ -103,7 +86,19 @@ class Home extends Component {
             <h5>more chefs</h5>
           </Link>
 
-
+          <form id="login-form" onSubmit={this.handleFormSubmit}>
+            <div>
+            <label>Email:</label>
+            <input type="email" name="email"/><br/>
+            </div>
+            <div>
+            <label>Password:</label>
+            <input type="password" name="password"/>
+            </div>
+            <div>
+            <input type="submit" value="Submit"/>
+            </div>
+          </form>
 
 
 
