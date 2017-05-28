@@ -1,6 +1,6 @@
 function getAddress(cb) {
 
- fetch('/address', {
+  fetch('/address', {
     accept: 'application/json',
   }).then(parseJSON)
     .then( (json) => {

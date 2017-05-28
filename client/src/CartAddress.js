@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import Client from "./Client.js";
+import React, { Component } from 'react';
+import Client from './Client.js';
 
 class CartAddress extends Component {
 
- constructor(props){
+  constructor(props){
     super(props);
     this.state = {
-      address: "",
+      address: '',
       displayForm: true
     };
   }
 
- handleButtonClick = (e) => {
+  handleButtonClick = (e) => {
     if (this.state.displayForm === true){
       Client.getAddress( (address) => {
         this.setState({
@@ -28,7 +28,7 @@ class CartAddress extends Component {
     }
   }
 
- render() {
+  render() {
     return (
       <div className="CartAddress">
       <h1>Address</h1>
@@ -36,9 +36,9 @@ class CartAddress extends Component {
           <input type="button" value="Same as home address" onClick={this.handleButtonClick} />
         </div>
 
-       {this.state.displayForm ? null : <h1>{this.state.address}</h1>}
+        {this.state.displayForm ? null : <h1>{this.state.address}</h1>}
 
-       {this.state.displayForm ?
+        {this.state.displayForm ?
           <div className="input-address">
             <input type="text" name="address1" placeholder="Address line 1" />
             <input type="text" name="address2" placeholder="Address line 2 (optional)" />
@@ -56,3 +56,4 @@ class CartAddress extends Component {
 }
 
 export default CartAddress;
+
