@@ -1,42 +1,56 @@
 import React, { Component } from 'react';
+import Client from './Client.js';
 
 class CartAddress extends Component {
 
-  constructor(props) {
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      useHomeAddress: false
+      address: '',
+      displayForm: true
+    };
+  }
+
+  handleButtonClick = (e) => {
+    if (this.state.displayForm === true){
+      Client.getAddress( (address) => {
+        this.setState({
+          address: address,
+          displayForm: false
+        });
+      });
+    }else{
+      Client.getAddress( (address) => {
+        this.setState({
+          displayForm: true
+        });
+      });
     }
   }
 
-  handleAddressChange = (event) => {
-    this.setState({useHomeAddress: !this.state.useHomeAddress});
-    console.log("Change!")
-  }
-
   render() {
-
-    let output = this.state.useHomeAddress ?
-      "Put the address of the user here." :
-      (
-        <div>
-        <input type="text" name="address1" placeholder="Address line 1" />
-        <input type="text" name="address2" placeholder="Address line 2 (optional)" />
-        <input type="text" name="city" placeholder="City" />
-        <input type="text" name="prov" placeholder="Province" />
-        <input type="text" name="country" placeholder="Country" />
-        <input type="text" name="postalCode" placeholder="Postal code" />
-        </div>
-      );
-
     return (
       <div className="CartAddress">
+      <h1>Address</h1>
         <div>
-          <span>Same as home address?</span>
-          <input type="checkbox" onChange={this.handleAddressChange}/>
+          <input type="button" value="Same as home address" onClick={this.handleButtonClick} />
         </div>
-        { output }
-        </div>
+
+        {this.state.displayForm ? null : <h1>{this.state.address}</h1>}
+
+        {this.state.displayForm ?
+          <div className="input-address">
+            <input type="text" name="address1" placeholder="Address line 1" />
+            <input type="text" name="address2" placeholder="Address line 2 (optional)" />
+            <input type="text" name="city" placeholder="City" />
+            <input type="text" name="prov" placeholder="Province" />
+            <input type="text" name="country" placeholder="Country" />
+            <input type="text" name="postalCode" placeholder="Postal code" />
+          </div>
+          :
+          null
+        }
+      </div>
     )
   }
 }

@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
 import 'react-date-picker/index.css';
-
 import { DateField, DatePicker } from 'react-date-picker'
-
 
 class Cal extends Component {
   render(){
-
-    // const onChange = (dateString, { dateMoment, timestamp }) => {
-    //       console.log(dateString)
-    //     }
-
     return(
+      <div>
+        <h1>Delivery Time</h1>
         <DateField
           dateFormat="YYYY-MM-DD"
           forceValidDate={true}
@@ -28,10 +23,8 @@ class Cal extends Component {
             weekStartDay={0}
           />
         </DateField>
+      </div>
     );
   }
 }
-
-
-
 export default Cal;

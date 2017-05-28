@@ -4,13 +4,19 @@ import Cal from './Calendar.js';
 import CartAddress from './CartAddress.js';
 import TimePicker from 'react-bootstrap-time-picker';
 
+
 class CartList extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+    };
+  }
+
   render() {
     return (
-
       <div className="Cart">
         <h1>Your Order:</h1>
-
         <table className="orderSummary">
           <thead>
             <tr>
@@ -34,8 +40,6 @@ class CartList extends Component {
           </tr>
           </tbody>
         </table>
-
-
         <div>
           <h1>Address</h1>
           <form>

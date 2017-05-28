@@ -40,6 +40,8 @@ class App extends Component {
   }
   handleToggle = () => this.setState({open: !this.state.open});
 
+  handleCartChange = (e) => {}
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -66,7 +68,7 @@ class App extends Component {
             <Route exact path="/recipe" component={Recipes}/>
             <Route path="/chef/:chefId" component={Chef} />
             <Route exact path="/chef" component={Chefs}/>
-            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} />} />
+            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} changeCartItems={this.handleCartChange}/>} />
             <Route path="/Users" component={Users}/>
             <Route path="/ChefReg" component={ChefReg}/>
             <Route path="/chefsprofile" component={ChefsProfile}/>
