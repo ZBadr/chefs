@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -68,14 +68,14 @@ class App extends Component {
             iconElementLeft={<div><FlatButton label="Menu" onTouchTap={this.handleToggle}/>
             <Drawer openSecondary={true} open={this.state.open}>
               <AppBar title="Menu" />
-              <MenuItem class="menulink"><Link to = "/">Home</Link></MenuItem>
-              <MenuItem class="menulink"><Link to = "/user">Log In/Sign Up</Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/chefreg"> Chef Registration </Link></MenuItem>
-              {this.state.authenticated ? <MenuItem class="menulink"><Link to="/Users">Profile</Link></MenuItem> : null }
-              <MenuItem class="menulink"><Link to="/chefsprofile"> Chef Profile </Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/cart">Cart({this.state.cartItems.length})</Link></MenuItem>
-              <MenuItem class="menulink" ><Link to="/OrderConfirmation"> Order Confirmation </Link></MenuItem>
-              {this.state.authenticated ? <MenuItem class="menulink" onClick={this.handleLogOut}>Log Out</MenuItem> : null}
+              <MenuItem className="menulink"><Link to = "/">Home</Link></MenuItem>
+              <MenuItem className="menulink"><Link to = "/user">Log In/Sign Up</Link></MenuItem>
+              <MenuItem className="menulink"><Link to="/chefreg"> Chef Registration </Link></MenuItem>
+              {this.state.authenticated ? <MenuItem className="menulink"><Link to="/Users">Profile</Link></MenuItem> : null }
+              <MenuItem className="menulink"><Link to="/chefsprofile"> Chef Profile </Link></MenuItem>
+              <MenuItem className="menulink"><Link to="/cart">Cart({this.state.cartItems.length})</Link></MenuItem>
+              <MenuItem className="menulink" ><Link to="/OrderConfirmation"> Order Confirmation </Link></MenuItem>
+              {this.state.authenticated ? <MenuItem className="menulink" onClick={this.handleLogOut}>Log Out</MenuItem> : null}
             </Drawer></div>}/>
 
             <Route exact path="/" component={Home}/>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import Info from './info.js';
 import Orderslist from './Orderslist.js';
 import './Users.css';
