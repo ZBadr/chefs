@@ -1,22 +1,38 @@
 "use strict";
+require('dotenv').config();
 
 const express = require('express');
 const router  = express.Router();
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 module.exports = (knex) => {
   router.post("/", (req, res) => {
         knex
-        .select("password")
+        .select("password", "firstName")
         .from("users")
         .where('email', req.body.email)
         .then((result) => {
-          if (result[0].password === req.body.password){
-            let token = jwt.sign({email: req.body.email}, 'secret');
-            res.send(token);
-          }else{
-            res.sendStatus(400);
-          }
+          bcrypt.compare(req.body.password, result[0].password, (err, valid) => {
+            if (err) {
+              console.log("Error in bcrypt");
+              throw err;
+            }else if(valid){
+              console.log('Password VALID');
+              let token = jwt.sign(
+                {
+                  firstName: result[0].firstName,
+                  email: req.body.email
+                },
+                process.env.JWT_SECRET,
+                {expiresIn: 60 * 60 * 24}
+              );
+              res.send(token);
+            }else{
+              res.sendStatus(400);
+            }
+          });
         });
   });
   return router;

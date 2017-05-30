@@ -1,8 +1,11 @@
 "use strict";
+require('dotenv').config();
 
 const express = require('express');
 const router  = express.Router();
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 module.exports = (knex) => {
   router.post("/", (req, res) => {
@@ -12,17 +15,24 @@ module.exports = (knex) => {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
-          password: req.body.password,
+          password: bcrypt.hashSync(req.body.password, saltRounds),
           imageUrl: null,
           address: req.body.address,
           phoneNumber: req.body.phoneNumber
         })
-        .then((result) => {
-            let token = jwt.sign({firstName: req.body.firstName, email: req.body.email}, 'secret');
-            res.send(token);
+        .then(() => {
+          let token = jwt.sign(
+            {
+              firstName: req.body.firstName,
+              email: req.body.email
+            },
+            process.env.JWT_SECRET,
+            {expiresIn: 60 * 60 * 24}
+          );
+          res.send(token);
         })
         .catch((error) => {
-          console.error(error);
+          res.sendStatus(400);
         })
   });
   return router;

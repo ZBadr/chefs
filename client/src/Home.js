@@ -1,36 +1,9 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {
-  Link
-} from 'react-router-dom'
-
-
-
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
 
-
-
-  // handlePingClick = (e) => {
-  //   e.preventDefault();
-  //   let payload = {
-  //     email: "johnsmith@gmail.com",
-  //     password: "johnsmith"
-  //   }
-  //   console.log(JSON.stringify(payload));
-  //   fetch('/login', {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded'
-  //     },
-  //     body: 'email=johnsmith%40gmail.com&password=johnsmith'
-  //   }).then((res) => {
-  //     // console.log(res);
-  //     if (res.status === 200) {
-  //       return <Redirect to="/user" />
-  //     }
-  //   }).catch(err => console.error(err));
-  // }
   render() {
     return (
       <MuiThemeProvider>

@@ -10,9 +10,7 @@ const knex        = require("knex")(knexConfig[ENV]);
 
 let loginRoute = require('./routes/login');
 let signupRoute = require('./routes/signup');
-
-
-
+let getProfileRoute = require('./routes/getProfile');
 
 const app = express();
 
@@ -23,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/login', loginRoute(knex));
 app.use('/signup', signupRoute(knex));
+app.use('/profile', getProfileRoute(knex));
 
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -35,12 +35,27 @@ class App extends Component {
     super(props);
     this.state = {
       cartItems: [{name: "Young Chow Fried Rice", quantity: 1, price: 750}],
-      open: false
+      open: false,
+      authenticated: false
     }
   }
   handleToggle = () => this.setState({open: !this.state.open});
 
+  handleLogOut = () => {
+    localStorage.clear();
+    /* eslint-disable no-restricted-globals */
+      location.assign("/");
+  }
+
   handleCartChange = (e) => {}
+
+  componentWillMount() {
+    if(!localStorage.jwtToken){
+      this.setState({authenticated: false});
+    }else{
+      this.setState({authenticated: true});
+    }
+  }
 
   render() {
     return (
@@ -48,20 +63,21 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-            <AppBar title="Chefs" iconClassNameRight="muidocs-icon-navigation-expand-more" 
-            iconElementRight={<FlatButton label="Order/Cart" />} 
+            <AppBar title="Chefs" iconClassNameRight="muidocs-icon-navigation-expand-more"
+            iconElementRight={<FlatButton label="Order/Cart" />}
             iconElementLeft={<div><FlatButton label="Menu" onTouchTap={this.handleToggle}/>
             <Drawer openSecondary={true} open={this.state.open}>
               <AppBar title="Menu" />
               <MenuItem class="menulink"><Link to = "/">Home</Link></MenuItem>
               <MenuItem class="menulink"><Link to = "/user">Log In/Sign Up</Link></MenuItem>
               <MenuItem class="menulink"><Link to="/chefreg"> Chef Registration </Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/Users">Profile</Link></MenuItem>
+              {this.state.authenticated ? <MenuItem class="menulink"><Link to="/Users">Profile</Link></MenuItem> : null }
               <MenuItem class="menulink"><Link to="/chefsprofile"> Chef Profile </Link></MenuItem>
               <MenuItem class="menulink"><Link to="/cart">Cart({this.state.cartItems.length})</Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/OrderConfirmation"> Order Confirmation </Link></MenuItem>
+              <MenuItem class="menulink" ><Link to="/OrderConfirmation"> Order Confirmation </Link></MenuItem>
+              {this.state.authenticated ? <MenuItem class="menulink" onClick={this.handleLogOut}>Log Out</MenuItem> : null}
             </Drawer></div>}/>
-           
+
             <Route exact path="/" component={Home}/>
             <Route path="/user" component={LoginSignup}/>
             <Route path="/recipe/:recipeId" component={Recipe} />
@@ -69,7 +85,7 @@ class App extends Component {
             <Route path="/chef/:chefId" component={Chef} />
             <Route exact path="/chef" component={Chefs}/>
             <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} changeCartItems={this.handleCartChange}/>} />
-            <Route path="/Users" component={Users}/>
+            <Route path="/Users" component={Users} />
             <Route path="/ChefReg" component={ChefReg}/>
             <Route path="/chefsprofile" component={ChefsProfile}/>
             <Route path="/OrderConfirmation" component={OrderConfirmation}/>
