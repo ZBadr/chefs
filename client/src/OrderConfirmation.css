@@ -53,3 +53,11 @@
     border-radius: 10px;
 }
 
+#com{
+    width: 700px;
+    height: 100px;
+}
+
+#servingstext{
+    text-align: center;
+}

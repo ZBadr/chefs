@@ -3,11 +3,12 @@
 }
 
 .order-summary{
-  margin-top: 10em;
-  margin-right: 10em;
+  margin-top: 1em;
+  margin-right: 1em;
 }
 
 .order{
   padding: 1em;
   text-align: left;
+  margin-bottom: 2em;
 }

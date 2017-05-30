@@ -1,19 +1,29 @@
+.loginpage{
+  /*width: 100%;*/
+  background-image: url("http://www.okclipart.com/img39/mycqmimmjuuwcshabmnk.jpg");
+  /*opacity: 0.2;*/
+  background-size: cover;
+}
+
 .mainlogin{
-  background-color:#E0E0E0;
+  z-index: 200;
   border-style: solid;
-  border-color: #0D47A1;
+  border-color: #E57373;
+  border-width: 1px;
   border-radius: 10px;
-  margin-top: 2em;
+  /*margin-top: 2em;*/
   width: 150px;
   padding:30px;
+  background-color: white;
+  margin-left: 550px;
 }
 .loginandsignup{
-    border-color: #0D47A1;
+    border-color: #E57373;
 }
 
 .loginandsignup h2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #0D47A1;
+    color: #E57373;
 }
 
 

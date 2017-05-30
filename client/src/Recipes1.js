@@ -78,16 +78,17 @@ class Recipes1 extends Component {
     >
       <Subheader >Recipes</Subheader>
       {tilesData.map((tile) => (
-          <div onClick={this.handleClick}>
         <GridTile
+          onClick={this.handleClick}
           key={tile.img}
           title={tile.dish}
           subtitle={<span>Rating: <b>{tile.rating}</b></span>}
           actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-        >
-          <img src={tile.img} />
+        > <img src={tile.img}  />
         </GridTile>
-        {
+      ))}
+    </GridList>
+    {
                 this.state.isShowingModal &&
                 <ModalContainer onClose={this.handleClose}>
                   <ModalDialog onClose={this.handleClose}>
@@ -99,9 +100,6 @@ class Recipes1 extends Component {
                   </ModalDialog>
                 </ModalContainer>
               }
-        </div>
-      ))}
-    </GridList>
   </div>
     );
   }

@@ -1,36 +1,11 @@
-/*import React from 'react';
-import {
-  Link
-} from 'react-router-dom'
-
-const Chefs = ({match}) => (
-  <div>
-    <h2>Chefs</h2>
-      <div>
-        <Link to = {`${match.url}/gordonramsay`}>
-          Gordon Ramsay
-        </Link>
-      </div>
-      <div>
-        <Link to = {`${match.url}/jamieoliver`}>
-          Jamie Oliver
-        </Link>
-      </div>
-      <div>
-        <Link to = {`${match.url}/susurlee`}>
-          Susur Lee
-        </Link>
-      </div>
-  </div>
-)*/
-
-
 import React from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
+
+// Styling for tiles
 const styles = {
   root: {
     display: 'flex',
@@ -44,69 +19,69 @@ const styles = {
   },
 };
 
+// Temporary seed data for view
 const tilesData = [
   {
-    img: 'http://clipart-library.com/images/8iGbMRGjT.jpg',
-    title: 'Breakfast',
-    dish: 'jill111',
+    img: 'http://www.youthvillage.co.za/wp-content/uploads/2014/11/Food-safety-hygiene-training1.jpg',
+    name: 'Jill',
+    rating: '5',
   },
   {
-    img: 'http://images.media-allrecipes.com/images/58656.png',
-    title: 'Tasty burger',
-    dish: 'pashminu',
+    img: 'https://static01.nyt.com/images/2011/12/14/dining/14MAMA_SPAN/14MAMA-jumbo.jpg',
+    name: 'Mama Chef',
+    rating: '4.7',
   },
   {
-    img: 'http://static.kidspot.com.au/cm_assets/613/italian_690x414-20150330021113.jpg~q75,dx720y432u1r1gg,c--.jpg',
-    title: 'Italian',
-    dish: 'Danson67',
+    img: 'http://cdn.abclocal.go.com/content/wtvd/images/cms/automation/images/1301472_1280x720.jpg',
+    name: 'Chef1',
+    rating: '4.6',
   },
   {
-    img: 'https://static.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg',
-    title: 'Pizza',
-    dish: 'fancycrave1',
+    img: 'http://newyork.peninsula.com/en/~/media/Images/New-York/06_DiscoverTheHotel/A_HotelMoments/Chef-Sam-1074-2.ashx',
+    name: 'Chef2',
+    rating: '4.5',
   },
   {
-    img: 'https://static1.squarespace.com/static/5685a06669492ea07bb9b05d/t/5702d1922b8ddeaf55815b1f/1459802521539/Angel+Food-+High+Res-6766.jpg?format=1500w',
-    title: 'Donuts',
-    dish: 'Hans',
+    img: 'https://cdn.shutterstock.com/shutterstock/videos/5893457/thumb/1.jpg?i10c=img.resize(height:160)',
+    name: 'Chef3',
+    rating: '4.7',
   },
   {
-    img: 'http://www.creativechinese.com/wp-content/uploads/2017/04/default-pasta.jpg',
-    title: 'Pasta',
-    dish: 'fancycravel',
+    img: 'https://media.mnn.com/assets/images/2014/11/Chef1.jpg.653x0_q80_crop-smart.jpg',
+    name: 'Chef4',
+    rating: '5',
   },
   {
-    img: 'http://www.theseafoodbar.com/Restaurants/seafoodbar/img/web/Seafoodbar_BAR7177.jpg',
-    title: 'Seafood',
-    dish: 'jill111',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sushi_chef_Masayoshi_Kazato_02.JPG/1200px-Sushi_chef_Masayoshi_Kazato_02.JPG',
+    name: 'Chef5',
+    rating: '4.1',
   },
   {
-    img: 'http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg',
-    title: 'Chicken',
-    dish: 'BkrmadtyaKarki',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Achatz.jpeg/1200px-Achatz.jpeg',
+    name: 'Chef6',
+    rating: '4.9',
   },
 ];
 
-/**
- * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
- */
 const Chefs = () => (
   <div style={styles.root}>
     <GridList
       cellHeight={180}
       style={styles.gridList}
     >
-      <Subheader>Recipes</Subheader>
+      <Subheader>Chefs </Subheader>
+{/*Looping and populating tiles starts here*/}
       {tilesData.map((tile) => (
         <GridTile
           key={tile.img}
-          title={tile.title}
-          subtitle={<span>by <b>{tile.dish}</b></span>}
+          title={tile.name}
+          subtitle={<span>Rating <b>{tile.rating}</b></span>}
           actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
         >
           <img src={tile.img} />
         </GridTile>
       ))}
+{/*End of tile looping and populating*/}
     </GridList>
   </div>
 );

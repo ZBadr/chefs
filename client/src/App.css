@@ -1,36 +1,77 @@
-.App {
+.appbar{
+  text-align: center;
+  position: fixed;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Home{
   text-align: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.searchboxes{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E57373;
+  height: 300px;
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 3em;
 }
 
-.App-intro {
-  font-size: large;
+.search-dish{
+  padding: 3em;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E57373;
+  float: left;
+  margin-left: 15em;
+  margin-top: 2em;
 }
 
-.App .nav-links {
-  display: inline-block;
-  margin: 1em;
-  position: relative;
-  right: 0;
+.search-chef{
+  border-radius: 10px;
+  padding: 5em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E57373;
+  float: right;
+  margin-right: 15em;
+  margin-top: 2em;
 }
 
-.App #logo {
-  position: relative;
-  left: 0;
+.search-ingredients{
+  border-radius: 10px;
+  padding: 3em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E57373;
+  float: right;
+  margin-right: 15em;
+  margin-top: 2em;
 }
 
-.App .Cart {
+#sub{
   text-align: center;
 }
 
-.App .menulink{
-  text-decoration: none;
+#footer{
+border-top: solid;
+border-color: #E57373;
+background-color: #E57373;
+/*margin-top: 4em;*/
+height: 250px;
+text-align: center;
+}
+
+#avatars{
+  margin-top: 3em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 2em;
+
 }
 
 

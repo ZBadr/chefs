@@ -1,37 +1,11 @@
-/*import React from 'react';
-import {
-  Link
-} from 'react-router-dom'
-
-const Recipes = ({match}) => (
-  <div>
-    <h2>Recipes</h2>
-      <div>
-        <Link to = {`${match.url}/youngchowfriedrice`}>
-          Young Chow Fried Rice
-        </Link>
-      </div>
-      <div>
-        <Link to = {`${match.url}/filetmignon`}>
-          Filet Mignon
-        </Link>
-      </div>
-      <div>
-        <Link to = {`${match.url}/foiegrasburger`}>
-          Foie gras Burger
-        </Link>
-      </div>
-  </div>
-)*/
-
-
-
 import React from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
+
+// Styling for tiles
 const styles = {
   root: {
     display: 'flex',
@@ -45,6 +19,7 @@ const styles = {
   },
 };
 
+// Temporary seed data for view
 const tilesData = [
   {
     img: 'https://static.wixstatic.com/media/c7a832_cecad3872fc34102a5bf3da44997d1e5~mv2.jpg',
@@ -88,9 +63,6 @@ const tilesData = [
   },
 ];
 
-/**
- * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
- */
 
 const Recipes = () => (
   <div style={styles.root}>
@@ -99,6 +71,7 @@ const Recipes = () => (
       style={styles.gridList}
     >
       <Subheader >Recipes</Subheader>
+      {/*Looping and populating tiles starts here*/}
       {tilesData.map((tile) => (
         <GridTile
           key={tile.img}
@@ -109,6 +82,7 @@ const Recipes = () => (
           <img src={tile.img} />
         </GridTile>
       ))}
+      {/*End of tile looping and populating*/}
     </GridList>
   </div>
 );

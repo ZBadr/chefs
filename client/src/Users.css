@@ -2,24 +2,47 @@
   padding: 1em;
 }
 
+.list{
+  margin-top: 1em;
+  width: 20em;
+}
+
 .profilePicture{
-  float: left;
+  padding-top: 2em;
+  padding-left: 1em;
 }
 
 .order-summary{
-  margin-top: 10em;
-  margin-right: 10em;
+  margin-top: 1em;
+  margin-right: 1em;
+}
+
+.orderDetails{
+  margin-top: 0.5em;
 }
 
 .order{
+  margin-left: 1em;
+  margin-bottom: 2em;
+  padding-left: 1em;
   text-align: left;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E57373;
+  border-radius: 10px;
 }
 
 .orderNumberCollapse{
-  color: darkblue;
+  color: #E57373;
+  padding-top: 2em;
 }
 
 .orderNumberActive{
+  font-weight: bolder;
   float: right;
-  color: green;
+}
+
+.order-totalprice{
+  font-weight: bolder;
+  float: right;
 }

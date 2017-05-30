@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
+import {List, ListItem} from 'material-ui/List';
+import Email from 'material-ui/svg-icons/communication/email';
+import Phone from 'material-ui/svg-icons/communication/phone';
+import Rate from 'material-ui/svg-icons/editor/monetization-on';
 
 class ChefsInfo extends Component {
+  // Need state here to have info of logged in user to be able to grab their info and populate image & list
   render() {
     return (
     <div>
-      <section className="chefsinfo">
-       <img class="profilePicture" src="../images/09.jpg" alt="chefspic" height="250" width="250"/>
-        <p className="chefsinfo-description">Description and cooking background displayed here</p><button className="button">Edit Description</button>
-        <div className="chefsinfo-rate">Hourly rate displayed here</div><button className="button">Edit Rate</button>
-        <div className="chefsinfo-email">Email displayed here</div><button className="button">Edit Email</button>
-        <div className="chefsinfo-phone">Phone displayed here</div><button className="button">Edit Phone Number</button>
+      <img className="profilePicture" src="http://img.freepik.com/free-vector/coloured-chefdesign_1152-72.jpg?size=338&ext=jpg" alt="chefs" height="250" width="250"/>
+      <section>
+       {/*List items start here*/}
+          <List className="list">
+            <ListItem primaryText="Email goes here" leftIcon={<Email />} />
+            <ListItem primaryText="Phone goes here" leftIcon={<Phone />} />
+            <ListItem primaryText="Hourly rate goes here" leftIcon={<Rate />} />
+          </List>
+       {/*List items end here*/}
       </section>
     </div>
     );

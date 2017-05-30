@@ -11,9 +11,9 @@ class OrderConfirmation extends Component {
               <div>Chef: Chef name goes here</div>
           </section>
           <section className="orderItems">
-                <span id="items">Item 1</span><span id="prices"> Price 1 </span><form action=""/><input type="checkbox" name="itemConfirmation" value="Yes"/>Yes<br/>
-                <span id="items">Item 2</span><span id="prices"> Price 2 </span><form action=""/><input type="checkbox" name="itemConfirmation" value="Yes"/>Yes<br/>
-                <span id="items">Item 3</span><span id="prices"> Price 3 </span><form action=""/><input type="checkbox" name="itemConfirmation" value="Yes"/>Yes<br/>
+                <div id="items">Item 1</div><div id="prices"> Price 1  </div><div id="servingstext"> Servings: <button>&minus;</button> 2 <button >+</button></div><br/>
+                <div id="items">Item 2</div><div id="prices"> Price 2  </div><div id="servingstext"> Servings: <button>&minus;</button> 2 <button >+</button></div><br/>
+                <div id="items">Item 3</div><div id="prices"> Price 3  </div><div id="servingstext"> Servings: <button>&minus;</button> 2 <button >+</button></div><br/>
                 <span id="prices">Total Price</span>
           </section>
           <section className="address">

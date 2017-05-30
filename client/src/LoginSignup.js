@@ -3,8 +3,8 @@ import './LoginSignup.css';
 
 
 const LoginSignup = () => (
-  <div>
-     <main className="mainlogin">
+  <div className="loginpage">
+     <main className="mainlogin" >
 
         <section className="loginandsignup">
 
