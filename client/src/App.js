@@ -41,12 +41,27 @@ class App extends Component {
     this.state = {
       cartItems: [{name: "Young Chow Fried Rice", quantity: 1, price: 750}],
       open: false,
-      badgeContent: 0
+      badgeContent: 0,
+      authenticated: false
     }
   }
   handleToggle = () => this.setState({open: !this.state.open});
 
+  handleLogOut = () => {
+    localStorage.clear();
+    /* eslint-disable no-restricted-globals */
+      location.assign("/");
+  }
+
   handleCartChange = (e) => {}
+
+  componentWillMount() {
+    if(localStorage.jwtToken){
+      this.setState({authenticated: true});
+    }else{
+      this.setState({authenticated: false});
+    }
+  }
 
   render() {
     return (
@@ -54,23 +69,23 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
+            
             <AppBar className="appbar" title="Chefs 4 Hire" iconClassNameRight="appbar-cart" 
             iconElementRight={<Badge badgeContent={4} primary={true} ><NotificationsIcon /></Badge>} 
             iconElementLeft={<div><FlatButton label="Menu" onTouchTap={this.handleToggle}/>
             <Drawer openSecondary={true} open={this.state.open}>
               <AppBar title="Menu" />
-              <MenuItem class="menulink"><Link to = "/">Home</Link></MenuItem>
+              <MenuItem className="menulink"><Link to="/">Home</Link></MenuItem>
               <MenuItem class="menulink"><Link to = "/Stepper">Stepper</Link></MenuItem>
-              <MenuItem class="menulink"><Link to = "/user">Log In/Sign Up</Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/chefreg"> Chef Registration </Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/Users">Profile</Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/chefsprofile"> Chef Profile </Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/cart">Cart({this.state.cartItems.length})</Link></MenuItem>
-              <MenuItem class="menulink"><Link to="/OrderConfirmation"> Order Confirmation </Link></MenuItem>
+              {this.state.authenticated ? null : <MenuItem className="menulink"><Link to="/user">Log In/Sign Up</Link></MenuItem> }
+              <MenuItem className="menulink"><Link to="/chefreg"> Chef Registration </Link></MenuItem>
+              {this.state.authenticated ? <MenuItem className="menulink"><Link to="/Users">Profile</Link></MenuItem> : null }
+              <MenuItem className="menulink"><Link to="/chefsprofile"> Chef Profile </Link></MenuItem>
+              <MenuItem className="menulink"><Link to="/cart">Cart({this.state.cartItems.length})</Link></MenuItem>
+              <MenuItem className="menulink" ><Link to="/OrderConfirmation"> Order Confirmation </Link></MenuItem>
+              {this.state.authenticated ? <MenuItem className="menulink" onClick={this.handleLogOut}>Log Out</MenuItem> : null}
             </Drawer></div>}/>
 
-            
-           
             <Route exact path="/" component={Home}/>
             <Route exact path="/Stepper" component={Stepper}/>
             <Route path="/user" component={LoginSignup}/>
@@ -79,7 +94,7 @@ class App extends Component {
             <Route path="/chef/:chefId" component={Chef} />
             <Route exact path="/chef" component={Chefs}/>
             <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} changeCartItems={this.handleCartChange}/>} />
-            <Route path="/Users" component={Users}/>
+            <Route path="/Users" component={Users} />
             <Route path="/ChefReg" component={ChefReg}/>
             <Route path="/chefsprofile" component={ChefsProfile}/>
             <Route path="/OrderConfirmation" component={OrderConfirmation}/>

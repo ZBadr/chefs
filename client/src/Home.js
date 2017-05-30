@@ -4,11 +4,8 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import TextField from 'material-ui/TextField';
+import { Link } from 'react-router-dom';
 
-import {
-  Redirect,
-  Link
-} from 'react-router-dom'
 
 
 // Styling for tiles
@@ -184,7 +181,6 @@ class Home extends Component {
           <Link to = "/chef">
             <h5>More chefs</h5>
           </Link>
-
       </div>
     );
   }

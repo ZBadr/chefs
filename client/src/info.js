@@ -5,6 +5,7 @@ import Phone from 'material-ui/svg-icons/communication/phone';
 import Location from 'material-ui/svg-icons/communication/location-on';
 
 
+
 class Info extends Component {
   // Need state here to have info of logged in user to be able to grab their info and populate image & list
   render() {
