@@ -12,6 +12,7 @@
     "react-date-picker": "^5.3.28",
     "react-dom": "^15.5.4",
     "react-modal-dialog": "^4.0.7",
+    "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "validator": "^7.0.0"

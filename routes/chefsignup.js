@@ -10,20 +10,21 @@ const saltRounds = 10;
 module.exports = (knex) => {
   router.post("/", (req, res) => {
     console.log(req.body);
-        knex('users')
+        knex('chefs')
         .insert({
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
           password: bcrypt.hashSync(req.body.password, saltRounds),
           imageUrl: null,
-          address: req.body.address,
-          phoneNumber: req.body.phoneNumber
+          description: req.body.description,
+          phoneNumber: req.body.phoneNumber,
+          hourlyRateInCents: req.body.hourlyRateInCents
         })
         .then((result, err) => {
           if (err){
             console.log('SIGN UP ERROR');
-            res.sendStatus(400)
+            res.sendStatus(400);
           }
           let token = jwt.sign(
             {
