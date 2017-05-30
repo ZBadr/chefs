@@ -50,10 +50,10 @@ class App extends Component {
   handleCartChange = (e) => {}
 
   componentWillMount() {
-    if(!localStorage.jwtToken){
-      this.setState({authenticated: false});
-    }else{
+    if(localStorage.jwtToken){
       this.setState({authenticated: true});
+    }else{
+      this.setState({authenticated: false});
     }
   }
 
@@ -68,8 +68,8 @@ class App extends Component {
             iconElementLeft={<div><FlatButton label="Menu" onTouchTap={this.handleToggle}/>
             <Drawer openSecondary={true} open={this.state.open}>
               <AppBar title="Menu" />
-              <MenuItem className="menulink"><Link to = "/">Home</Link></MenuItem>
-              <MenuItem className="menulink"><Link to = "/user">Log In/Sign Up</Link></MenuItem>
+              <MenuItem className="menulink"><Link to="/">Home</Link></MenuItem>
+              {this.state.authenticated ? null : <MenuItem className="menulink"><Link to="/user">Log In/Sign Up</Link></MenuItem> }
               <MenuItem className="menulink"><Link to="/chefreg"> Chef Registration </Link></MenuItem>
               {this.state.authenticated ? <MenuItem className="menulink"><Link to="/Users">Profile</Link></MenuItem> : null }
               <MenuItem className="menulink"><Link to="/chefsprofile"> Chef Profile </Link></MenuItem>

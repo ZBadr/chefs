@@ -23,6 +23,13 @@ class LoginSignup extends Component {
      };
     }
 
+    componentWillMount() {
+        if(localStorage.jwtToken){
+            /* eslint-disable no-restricted-globals */
+            location.assign('/Users');
+        }
+    }
+
     handleLogin = (e) => {
         e.preventDefault();
         let email = document.getElementById('login-email').value;
@@ -30,7 +37,7 @@ class LoginSignup extends Component {
         if (!validator.isEmail(email) || validator.isEmpty(email)) {
             return this.setState({emptyLoginEmail: true});
         }
-        if(password.trim() === "") {
+        if(validator.isEmpty(password)) {
             return this.setState({emptyLoginPassword: true});
         }else{
             let oReq = new XMLHttpRequest(),
@@ -44,7 +51,8 @@ class LoginSignup extends Component {
                 localStorage.setItem('jwtToken', oReq.responseText);
                 /* eslint-disable no-restricted-globals */
                 location.assign('/Users');
-              }else if (oReq.responseText === 'Bad Request'){
+              }else if(oReq.status === 400){
+                console.log(oReq.status);
                 return self.setState({loginError: true});
               }
             };
@@ -94,13 +102,16 @@ class LoginSignup extends Component {
                 localStorage.setItem('jwtToken', oReq.responseText);
                  /*eslint-disable no-restricted-globals*/
                 location.assign('/Users');
-              }else if(oReq.responseText === 'Bad Request'){
+              }else if(oReq.status === 400){
+                console.log(oReq.status);
                 return self.setState({signupError: true});
               }
             };
             oReq.send(`firstName=${encodeURIComponent(first_name)}&lastName=${encodeURIComponent(last_name)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&address=${encodeURIComponent(address)}&phoneNumber=${encodeURIComponent(phoneNumber)}`);
         }
     }
+
+
 
 
     render(){

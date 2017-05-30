@@ -45,7 +45,7 @@ class ChefReg extends Component {
                 localStorage.setItem('jwtToken', oReq.responseText);
                 /* eslint-disable no-restricted-globals */
                 location.assign('/Users');
-              }else if (oReq.responseText === 'Bad Request'){
+              }else if (oReq.status === 400){
                 return self.setState({loginError: true});
               }
             };
@@ -64,7 +64,7 @@ class ChefReg extends Component {
         let phoneNumber = document.getElementById('chefPhoneNumber').value;
         let description = document.getElementById('chefDescription').value;
 
-        if(validator.isEmpty(first_name) || first_name.replace(/\W/g, "") === "") {
+        if(validator.isEmpty(first_name)) {
             return this.setState({emptySignupFirstName: true});
         }
         if(validator.isEmpty(last_name)) {
@@ -87,7 +87,7 @@ class ChefReg extends Component {
         }else{
             let oReq = new XMLHttpRequest(),
                 method = "POST",
-                url = "/signup";
+                url = "/chefsignup";
             oReq.open(method, url);
             oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             const self = this;
@@ -96,7 +96,7 @@ class ChefReg extends Component {
                 localStorage.setItem('jwtToken', oReq.responseText);
                  /*eslint-disable no-restricted-globals*/
                 location.assign('/Users');
-              }else if(oReq.responseText === 'Bad Request'){
+              }else if(oReq.status === 400){
                 return self.setState({signupError: true});
               }
             };
@@ -129,21 +129,21 @@ class ChefReg extends Component {
                 <h2>Chef Registration</h2>
                     <form action="/chefreg" onSubmit={this.handleChefSignup}>
                     <h8>{this.state.emptySignupFirstName ? "Invalid Entry" : null}</h8>
-                    <textarea id="chefFirstName" type = "textarea" name="firstName" placeholder="First Name"></textarea><br/>
+                    <input id="chefFirstName" type = "textarea" name="firstName" placeholder="First Name"></input><br/>
                     <h8>{this.state.emptySignupLastName ? "Invalid Entry" : null}</h8>
-                    <textarea id="chefLastName" type = "textarea" name="lastName" placeholder="LastName"></textarea><br/>
+                    <input id="chefLastName" type = "textarea" name="lastName" placeholder="LastName"></input><br/>
                     <h8>{this.state.emptySignupEmail ? "Invalid Entry" : null}</h8>
-                    <textarea id="chefEmail" type = "email" name="email" placeholder="Email"></textarea><br/>
+                    <input id="chefEmail" type = "email" name="email" placeholder="Email"></input><br/>
                     <h8>{this.state.emptySignupPassword ? "Invalid Entry" : null}</h8>
-                    <textarea id="chefPassword" type = "textarea" name="password" placeholder="Password"></textarea><br/>
+                    <input id="chefPassword" type = "password" name="password" placeholder="Password"></input><br/>
                     <h8>{this.state.PwMismatch ? "Password mismatch" : null}</h8>
-                    <textarea id="chefPasswordConf" type = "textarea" name="passwordConfirmation" placeholder="Password Confirmation"></textarea><br/>
+                    <input id="chefPasswordConf" type = "password" name="passwordConfirmation" placeholder="Password Confirmation"></input><br/>
                     <h8>{this.state.emptySignupPhoneNumber ? "Invalid Entry" : null}</h8>
-                    <textarea id="chefPhoneNumber" type = "textarea" name="phone" placeholder="Phone #"></textarea><br/>
+                    <input id="chefPhoneNumber" type = "textarea" name="phone" placeholder="Phone #"></input><br/>
                     <h8>{this.state.emptyChefDescription ? "Invalid Entry" : null}</h8>
-                    <textarea id="chefDescription" type = "textarea" name="description" placeholder="Cooking background/description"></textarea><br/>
+                    <input id="chefDescription" type = "textarea" name="description" placeholder="Cooking background/description"></input><br/>
                     <h8>{this.state.emptyChefHourlyRate ? "Invalid Entry" : null}</h8>
-                    <textarea id="chefHourlyRate" type = "textarea" name="phone" placeholder="Hourly Rate"></textarea><br/>
+                    <input id="chefHourlyRate" type = "textarea" name="phone" placeholder="Hourly Rate"></input><br/>
                     <input id="submit" type="submit" />
                     <p class="error"></p>
                     </form>

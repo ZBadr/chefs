@@ -13,9 +13,9 @@ module.exports = (knex) => {
         .select("password", "firstName")
         .from("users")
         .where('email', req.body.email)
-        .then((result, err) => {
-          if (err){
-            res.sendStatus(400);
+        .then((result, error) => {
+          if(error){
+            return res.statusCode(400);
           }else{
             bcrypt.compare(req.body.password, result[0].password, (err, valid) => {
               if (err) {
@@ -34,11 +34,16 @@ module.exports = (knex) => {
                 res.send(token);
               }else{
                 console.log('Password INVALID');
-                res.sendStatus(400);
+                res.statusCode(400);
               }
-            });
+            })
           }
-        });
+        })
+        .catch((error) => {
+          console.log('Login error:' + error);
+          res.statusCode(400);
+        })
+
   });
   return router;
 }

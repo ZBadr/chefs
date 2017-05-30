@@ -9,14 +9,12 @@ const saltRounds = 10;
 
 module.exports = (knex) => {
   router.post("/", (req, res) => {
+    console.log(req.body)
         knex
         .select("password", "firstName")
         .from("chefs")
         .where('email', req.body.email)
-        .then((result, err) => {
-          if (err){
-            res.sendStatus(400);
-          }else{
+        .then((result) => {
             bcrypt.compare(req.body.password, result[0].password, (err, valid) => {
               if (err) {
                 console.log("Error in bcrypt");
@@ -37,8 +35,11 @@ module.exports = (knex) => {
                 res.sendStatus(400);
               }
             });
-          }
-        });
+        })
+        .catch((error) => {
+          console.log('CAUGHT ERROR');
+          res.sendStatus(400);
+        })
   });
   return router;
 }

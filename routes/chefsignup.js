@@ -21,11 +21,7 @@ module.exports = (knex) => {
           phoneNumber: req.body.phoneNumber,
           hourlyRateInCents: req.body.hourlyRateInCents
         })
-        .then((result, err) => {
-          if (err){
-            console.log('SIGN UP ERROR');
-            res.sendStatus(400);
-          }
+        .then((result) => {
           let token = jwt.sign(
             {
               firstName: req.body.firstName,
