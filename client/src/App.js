@@ -39,7 +39,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      cartItems: [{name: "Young Chow Fried Rice", quantity: 1, price: 750}],
+      cartItems: [],
       open: false,
       badgeContent: 0,
       authenticated: false
@@ -53,7 +53,10 @@ class App extends Component {
       location.assign("/");
   }
 
-  handleCartChange = (e) => {}
+  handleCartChange = (newCartItem) => {
+    let newCart = this.state.cartItems.concat(newCartItem);
+    this.setState({cartItems: newCart});
+  }
 
   componentWillMount() {
     if(localStorage.jwtToken){
@@ -69,7 +72,6 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-
             <AppBar className="appbar" title="Home Cooked" iconClassNameRight="appbar-logout" 
             iconElementRight={this.state.authenticated ?  <MenuItem  onClick={this.handleLogOut}>Log Out</MenuItem> : null } 
             iconElementLeft={<div>
@@ -80,23 +82,22 @@ class App extends Component {
             <Link className="appbar-link-profile" to="/Users">Profile</Link>
             <Link className="appbar-link-chefsprofile" to="/chefsprofile"> Chef Profile </Link>
             </div>}/>
-
             <Route exact path="/" component={Home}/>
-            <Route exact path="/Stepper" component={Stepper}/>
+            <Route exact path="/Stepper" component={() => <Stepper getCartItems={this.state.cartItems} changeCartItems={this.handleCartChange} />} />
             <Route path="/user" component={LoginSignup}/>
             <Route path="/recipe/:recipeId" component={Recipe} />
             <Route exact path="/recipe" component={Recipes2}/>
             <Route path="/chef/:chefId" component={Chef} />
             <Route exact path="/chef" component={Chefs}/>
-            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} changeCartItems={this.handleCartChange}/>} />
+            <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} />} />
             <Route path="/Users" component={Users} />
             <Route path="/ChefReg" component={ChefReg}/>
             <Route path="/chefsprofile" component={ChefsProfile}/>
             <Route path="/OrderConfirmation" component={OrderConfirmation}/>
 
             <Footer />
-             
-           
+
+
           </div>
         </Router>
       </div>

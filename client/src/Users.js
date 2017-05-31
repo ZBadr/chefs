@@ -15,7 +15,7 @@ class Users extends Component {
     }
   }
 
-  componentWillMount() { //Checks credential before page is rendered
+  componentWillMount() {
     if (!localStorage.jwtToken){
       /* eslint-disable no-restricted-globals */
       location.assign("/user");
@@ -29,8 +29,9 @@ class Users extends Component {
         const self = this;
         oReq.onreadystatechange = function () {
           if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+            console.log('RESULT OBJECT FROM THE SERVER BEFORE SETTING STATE: ' + oReq.responseText);
             let resObj = JSON.parse(oReq.responseText);
-            self.setState({user: resObj[0]});
+            self.setState({user: resObj});
           }
         };
         console.log(this.state.user[0]);
@@ -52,8 +53,8 @@ class Users extends Component {
       return (
           <div className="user-profile-page">
             <h1>Hello {this.state.user.firstName}!</h1>
-            <Info />
-            <Orderslist />
+            <Info email={this.state.user.email} address={this.state.user.address} phoneNumber={this.state.user.phoneNumber} />
+            // {this.state.user.orderHistory === null ? <h5>No Order History</h5> : <Orderslist orderHistory={this.state.user.orderHistory} />}
           </div>
       );
     }

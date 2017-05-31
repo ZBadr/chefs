@@ -16,11 +16,10 @@ class Info extends Component {
       <img className="user-profilePicture" src="https://www.atomix.com.au/media/2015/06/atomix_user31.png" alt="chefs" height="250" width="250"/>
       <section>
        {/*List items start here*/}
-          <List className="user-list">
-            <ListItem primaryText="Name goes here" leftIcon={<Name />} />
-            <ListItem primaryText="Email goes here" leftIcon={<Email />} />
-            <ListItem primaryText="Phone goes here" leftIcon={<Phone />} />
-            <ListItem primaryText="Address goes here" leftIcon={<Location />} />
+          <List className="list">
+            <ListItem primaryText={this.props.email} leftIcon={<Email />} />
+            <ListItem primaryText={this.props.phoneNumber} leftIcon={<Phone />} />
+            <ListItem primaryText={this.props.address} leftIcon={<Location />} />
           </List>
        {/*List items end here*/}
       </section>

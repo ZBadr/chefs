@@ -14,6 +14,7 @@ import ShoppingCart from 'material-ui/svg-icons/action/add-shopping-cart';
 import Book from 'material-ui/svg-icons/action/book';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
+import validator from 'validator';
 
 
 
@@ -121,6 +122,7 @@ const tilesData1 = [
 ];
 
 
+
 class VerticalLinearStepper extends React.Component {
 
 // state and click functions
@@ -128,11 +130,37 @@ class VerticalLinearStepper extends React.Component {
     finished: false,
     stepIndex: 0,
     open: false,
-    currentTile: null
+    currentTile: null,
+    result: [],
+    chefResult: []
   };
 
   handleNext = () => {
     const {stepIndex} = this.state;
+    if (stepIndex === 0) {
+      let cartItems = this.props.getCartItems;
+      let query = [];
+      cartItems.forEach((item) => {
+        query.push(item.recipeName);
+      });
+      // let query = this.props.getCartItems.split(",");
+      let oReq = new XMLHttpRequest(),
+          method = "GET",
+          url = `/findChefByRecipes?search=${encodeURIComponent(query)}`;
+      oReq.open(method, url);
+      oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      const self=this;
+      oReq.onreadystatechange = function () {
+        if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+          let result = JSON.parse(oReq.responseText)
+          let updatedResults = self.state.chefResult.concat(result);//THIS IS THE SEARCH RESULT OBJECT
+          self.setState({chefResult: updatedResults});
+        }else if(oReq.status === 400){
+          return self.setState({noResult: true});
+        }
+      };
+      oReq.send();
+    }
     this.setState({
       stepIndex: stepIndex + 1,
       finished: stepIndex >= 2,
@@ -149,13 +177,12 @@ class VerticalLinearStepper extends React.Component {
   handleOpen = (tile) => () => {
     this.setState({
         open: true,
-        currentTile: tile
-        
+        currentTile: tile,
     });
 
   };
 
-handleClose = () => {
+  handleClose = () => {
     this.setState({open: false, currentTile: null});
   };
 
@@ -186,6 +213,66 @@ handleClose = () => {
     );
   }
 
+  handleSearchByIngredients = (e) => {
+    if (e.key === 'Enter'){
+      this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
+      let query = document.getElementById('search-by-ingredients').value;
+      if (validator.isEmpty(query)) {
+          return this.setState({emptySearchByIngredients: true});
+      }else{
+          let oReq = new XMLHttpRequest(),
+              method = "GET",
+              url = `/searchByIngredients?search=${query}`;
+          oReq.open(method, url);
+          oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          const self=this;
+          oReq.onreadystatechange = function () {
+            if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+              let result = JSON.parse(oReq.responseText)
+              let updatedResults = self.state.result.concat(result);//THIS IS THE SEARCH RESULT OBJECT
+              self.setState({result: updatedResults});
+            }else if(oReq.status === 400){
+              return self.setState({noResult: true});
+            }
+          };
+          oReq.send();
+      }
+      e.target.value = "";//Clears search field
+    }
+  }
+
+  handleSearchByDish = (e) => { //THIS FINDS CHEF BY DISH
+    if (e.key === 'Enter'){
+      this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
+      let query = document.getElementById('search-by-dish').value;
+      if (validator.isEmpty(query)) {
+          return this.setState({emptySearchByDish: true});
+      }else{
+          let oReq = new XMLHttpRequest(),
+              method = "GET",
+              url = `/searchByRecipes?search=${query}`;
+          oReq.open(method, url);
+          oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          const self=this;
+          oReq.onreadystatechange = function () {
+            if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+              let result = JSON.parse(oReq.responseText)
+              let updatedResults = self.state.result.concat(result);
+              self.setState({result: updatedResults});
+            }else if(oReq.status === 400){
+              return self.setState({noResult: true});
+            }
+          };
+          oReq.send();
+      }
+      e.target.value = "";//Clears search field
+    }
+  }
+
+  handleAddToCart = () => {
+    this.props.changeCartItems(this.state.currentTile);
+  }
+
   render() {
     const {finished, stepIndex} = this.state;
     //Action buttons for dialog pop-up when clicking tiles
@@ -200,7 +287,7 @@ handleClose = () => {
         //label={<IconButton><ShoppingCart color="white" /></IconButton>}
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleAddToCart}
       />
     ];
 
@@ -215,11 +302,15 @@ handleClose = () => {
               {/*Search fields for dishes */}
                 <div>
                     <TextField
+                      id="search-by-dish"
                       hintText="Search by dish"
+                      onKeyPress={this.handleSearchByDish}
                       /><br />
                       <br />
                     <TextField
+                      id="search-by-ingredients"
                       hintText="Search by ingredients"
+                      onKeyPress={this.handleSearchByIngredients}
                       /><br />
                 </div>
                 {/*Section for recipe/dish tile styling and creation*/}
@@ -229,15 +320,15 @@ handleClose = () => {
                     style={styles.gridList}
                     >
                     <Subheader id="sub">Dishes</Subheader>
-                    {/*Looping and populating of recipe/dish tiles starts here*/}
-                    {tilesData.map((tile) => (
+                    {/*Looping and populating tiles starts here*/}
+                    {this.state.result.map((tile) => (
                         <GridTile
                             onTouchTap={this.handleOpen(tile)}
-                            key={tile.img}
-                            title={tile.dish}
+                            key={tile.imageUrl}
+                            title={tile.recipeName}
                             subtitle={<span>Rating: <b>{tile.rating}</b></span>}
                             >
-                            <img src={tile.img} />
+                            <img src={tile.imageUrl} />
                         </GridTile>
                         ))}
                         {/*End of recipe/dish tile looping and populating*/}
@@ -273,8 +364,8 @@ handleClose = () => {
                         style={styles.gridList}
                         >
                         <Subheader id="sub">Chefs </Subheader>
-                    {/*Looping and populating chef tiles starts here*/}
-                        {tilesData1.map((tile) => (
+                    {/*Looping and populating tiles starts here*/}
+                        {this.state.chefResult.map((tile) => (
                             <GridTile
                                 onTouchTap={this.handleOpen(tile)}
                                 key={tile.img}
@@ -355,7 +446,7 @@ getDish = () => {
       if (!this.state.currentTile) {
           return 'Test Content';
       }
-      return this.state.currentTile.dish;
+      return this.state.currentTile.recipeName;
   }
 
 getRating = () => {
