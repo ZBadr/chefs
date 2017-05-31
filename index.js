@@ -16,6 +16,7 @@ let getProfileRoute = require('./routes/getProfile');
 let searchByIngredients = require('./routes/searchByIngredients');
 let searchByRecipes = require('./routes/searchByRecipes');
 let searchByChefs = require('./routes/searchByChefs');
+let findChefByRecipes = require('./routes/findChefByRecipes');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/profile', getProfileRoute(knex));
 app.use('/searchByIngredients', searchByIngredients(knex));
 app.use('/searchByRecipes', searchByRecipes(knex));
 app.use('/searchByChefs', searchByChefs(knex));
+app.use('/findChefByRecipes', findChefByRecipes(knex));
 
 
 

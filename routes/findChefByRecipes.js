@@ -11,25 +11,25 @@ router.get("/", (req, res) => {
     console.log('QUERY RECEIVED IN THE SERVER: ' + query);
     knex
       .select("id")
-      .from("ingredients")
+      .from("recipes")
       .whereIn("name", query)
       .then((result) => {
         return result.map(x => {return x.id});
         // console.log("query:",result)
       })
       .then((result) => {
+        console.log("result:", result)
         knex
-          .count("name")
-          .select("name","recipes.imageUrl", "recipes.cuisine", "recipes.cookingTimeInMinutes")
-          .from("recipes")
-          .join("recipe_ingredients", 'id', 'recipeID')
-          .whereIn("ingredientID", result)
-          .groupBy("name","recipes.imageUrl", "recipes.cuisine", "recipes.cookingTimeInMinutes")
-          .having(knex.raw("count(name)"), "=", result.length)
-          .then((dish) => {
-            console.log('SEARCH RESULT IN THE SERVER BEFORE SENDING TO REACT: ' + dish);
-            res.send(dish);
-            // res.send(`<html><body> ${result.map((x) => {return x.name})} </body></html>`);
+          .count("email")
+          .select("email")
+          .from("chefs")
+          .join("chef_recipes", 'id', 'chefID')
+          .whereIn("recipeID", result)
+          .groupBy("email")
+          .having(knex.raw("count(email)"), "=", result.length)
+          .then((result) => {
+            console.log("res:", res)
+            res.send(result);
           })
         })
         .catch((err) => { console.error(err); });

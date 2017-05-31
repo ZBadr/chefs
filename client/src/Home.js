@@ -7,8 +7,6 @@ import TextField from 'material-ui/TextField';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 
-
-
 // Styling for tiles
 const styles = {
   root: {
@@ -22,8 +20,6 @@ const styles = {
     overflowY: 'auto',
   },
 };
-
-
 
 // Temporary seed data for view
 const tilesData = [
@@ -126,14 +122,10 @@ class Home extends Component {
     };
   }
 
-
-
   handleSearchByDish = (e) => { //THIS FINDS CHEF BY DISH
-    console.log('EVENT TARGET URL: ' + e.target.url);
     if (e.key === 'Enter'){
       this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
       let query = document.getElementById('search-by-dish').value;
-      console.log('QUERY IN THE HANDLER: ' + query);
       if (validator.isEmpty(query)) {
           return this.setState({emptySearchByDish: true});
       }else{
@@ -149,14 +141,12 @@ class Home extends Component {
               let updatedResults = self.state.result.concat(result[0].email);
               self.setState({result: updatedResults});
             }else if(oReq.status === 400){
-              console.log(oReq.status);
               return self.setState({noResult: true});
             }
           };
-          console.log('QUERY SUBMITTED TO SERVER: ' + `search=${encodeURIComponent(query)}`);
           oReq.send(`search=${encodeURIComponent(query)}`);
       }
-      e.target.value = "";
+      e.target.value = "";//Clears search field
     }
   }
 
@@ -164,7 +154,6 @@ class Home extends Component {
     if (e.key === 'Enter'){
       this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
       let query = document.getElementById('search-by-ingredients').value;
-      console.log('QUERY IN THE HANDLER: ' + query);
       if (validator.isEmpty(query)) {
           return this.setState({emptySearchByIngredients: true});
       }else{
@@ -180,14 +169,12 @@ class Home extends Component {
               let updatedResults = self.state.result.concat(result[0].name);//THIS IS THE SEARCH RESULT OBJECT
               self.setState({result: updatedResults});
             }else if(oReq.status === 400){
-              console.log(oReq.status);
               return self.setState({noResult: true});
             }
           };
-          console.log('QUERY SUBMITTED TO SERVER: ' + `search=${encodeURIComponent(query)}`);
           oReq.send(`search=${encodeURIComponent(query)}`);
       }
-      e.target.value = "";
+      e.target.value = "";//Clears search field
     }
   }
 
@@ -195,7 +182,6 @@ class Home extends Component {
     if (e.key === 'Enter'){
       this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
       let query = document.getElementById('search-by-chefs').value;
-      console.log('QUERY IN THE HANDLER: ' + query);
       if (validator.isEmpty(query)) {
           return this.setState({emptySearchByChefs: true});
       }else{
@@ -211,14 +197,12 @@ class Home extends Component {
               let updatedResults = self.state.result.concat(result[0].name);//THIS IS THE SEARCH RESULT OBJECT
               self.setState({result: updatedResults});
             }else if(oReq.status === 400){
-              console.log(oReq.status);
               return self.setState({noResult: true});
             }
           };
-          console.log('QUERY SUBMITTED TO SERVER: ' + `search=${encodeURIComponent(query)}`);
           oReq.send(`search=${encodeURIComponent(query)}`);
       }
-      e.target.value = "";
+      e.target.value = ""; //Clear search field
     }
   }
 
