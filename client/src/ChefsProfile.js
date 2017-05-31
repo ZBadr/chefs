@@ -7,7 +7,7 @@ class ChefsProfile extends Component {
 
 render() {
     return (
-      <div>
+      <div className="chef-profile-page">
         <ChefsInfo />
         <Orderslist />
       </div>

@@ -1,15 +1,33 @@
-.info{
+.user-profile-page{
+  background-image: url("food-background.png");
+}
+
+.user-profile{
+  position: relative;
   padding: 1em;
 }
 
-.list{
-  margin-top: 1em;
-  width: 20em;
+h1{
+  text-align: center;
 }
 
-.profilePicture{
-  padding-top: 2em;
+.user-list{
+  position: absolute;
+  top: 60%;
+  left: 740px;
+  height: 250px;
+  margin-top: -125px;
+  /*padding: 3em;*/
+  width: 20em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.user-profilePicture{
+  padding-top: 1em;
   padding-left: 1em;
+  display: inline-block;
+  margin-left: 430px;
 }
 
 .order-summary{
@@ -22,9 +40,10 @@
 }
 
 .order{
-  margin-left: 1em;
+  margin-left: 10em;
+  margin-right: 10em;
   margin-bottom: 2em;
-  padding-left: 1em;
+  padding: 1em;
   text-align: left;
   border-style: solid;
   border-width: 1px;
@@ -34,7 +53,7 @@
 
 .orderNumberCollapse{
   color: #E57373;
-  padding-top: 2em;
+  padding: 1.5em;
 }
 
 .orderNumberActive{

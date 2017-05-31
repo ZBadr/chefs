@@ -1,14 +1,42 @@
+.chef-profile-page{
+  background-image: url("food-background.png")
+}
+
+.chef-profile{
+  position: relative;
+}
+
+
+.chef-profilePicture{
+  padding-top: 1em;
+  padding-left: 1em;
+  display: inline-block;
+  margin-left: 180px;
+}
+
 .chefsinfo{
   padding: 1em;
 }
 
-.order-summary{
-  margin-top: 1em;
-  margin-right: 1em;
+.description{
+  position: absolute;
+  top: 70%;
+  left: 550px;
+  height: 250px;
+  margin-top: -125px;
+  width: 20%;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.order{
-  padding: 1em;
-  text-align: left;
-  margin-bottom: 2em;
+.chef-list{
+  position: absolute;
+  top: 70%;
+  left: 950px;
+  height: 250px;
+  margin-top: -125px;
+  /*padding: 3em;*/
+  width: 20em;
+  display: inline-block;
+  vertical-align: middle;  
 }

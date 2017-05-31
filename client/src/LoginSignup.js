@@ -117,73 +117,41 @@ class LoginSignup extends Component {
     render(){
         return(
             <div className="loginpage">
-             <main className="mainlogin">
+             <main id="mainlogin" className="mainlogin">
                 <section className="loginandsignup">
                     <h2>Login</h2>
                         <h7>{this.state.loginError ? "Invalid login" : null}</h7>
                         <form id="login-form" onSubmit={this.handleLogin} >
-                            <div>
-                            <h8>{this.state.emptyLoginEmail ? "This field cannot be empty" : null}</h8>
-                            <label>Email:</label>
-                            <input type="email" name="email" id="login-email" /><br/>
-                            </div>
-                            <div>
-                            <h8>{this.state.emptyLoginPassword ? "This field cannot be empty" : null}</h8>
-                            <label>Password:</label>
-                            <input type="password" name="password" id="login-password"/>
-                            </div>
-                            <div>
-                            <input type="submit" value="Submit" />
-                            </div>
-                        </form>
 
-                <div className="line"></div>
+                            <h8>{this.state.emptyLoginEmail ? "This field cannot be empty" : null}</h8>
+                            <input type="email" name="email" id="login-email" placeholder="Email"/><br/>
+                            <h8>{this.state.emptyLoginPassword ? "This field cannot be empty" : null}</h8>
+                            <input type="password" name="password" id="login-password" placeholder="Password"/>
+                            <input type="submit" value="Submit" />
+                        </form>
 
                     <h2>Sign Up</h2>
                     <h5>{this.state.signupError ? "User already exists!" : null}</h5>
                         <form id="signup-form" onSubmit={this.handleSignup} >
-                            <div>
                                 <h8>{this.state.emptySignupFirstName ? "Invalid Entry" : null}</h8>
-                                <label>First Name:</label>
-                                <input type="text" name="firstName" id="signup-firstName"/><br/>
-                            </div>
-                            <div>
+                                <input type="text" name="firstName" id="signup-firstName" placeholder="First Name"/><br/>
                                 <h8>{this.state.emptySignupLastName ? "Invalid Entry" : null}</h8>
-                                <label>Last Name:</label>
-                                <input type="text" name="lastName" id="signup-lastName"/><br/>
-                            </div>
-                            <div>
+                                <input type="text" name="lastName" id="signup-lastName" placeholder="Last Name"/><br/>
                                 <h8>{this.state.emptySignupEmail ? "Invalid Entry" : null}</h8>
-                                <label>Email:</label>
-                                <input type="email" name="email" id="signup-email"/><br/>
-                            </div>
-                            <div>
+                                <input type="email" name="email" id="signup-email" placeholder="Email"/><br/>
                                 <h8>{this.state.emptySignupPassword ? "Invalid Entry" : null}</h8>
-                                <label>Password:</label>
-                                <input type="password" name="password" id="signup-password"/><br/>
-                            </div>
-                            <div>
+                                <input type="password" name="password" id="signup-password" placeholder="Password"/><br/>
                                 <h8>{this.state.PwMismatch ? "Password mismatch" : null}</h8>
-                                <label>Retype Password:</label>
-                                <input type="password" name="passwordConfirmation" id="signup-password-conf" />
-                            </div>
-                            <div>
+                                <input type="password" name="passwordConfirmation" id="signup-password-conf" placeholder="Password Confirmation"/>
                                 <h8>{this.state.emptySignupAddress ? "Invalid Entry" : null}</h8>
-                                <label>Address:</label>
-                                <input type="text" name="address" id="signup-address"/>
-                            </div>
-                            <div>
+                                <input type="text" name="address" id="signup-address" placeholder="Address"/>
                                 <h8>{this.state.emptySignupPhoneNumber ? "Invalid Entry" : null}</h8>
-                                <label>Phone Number:</label>
-                                <input type="text" name="phoneNumber" id="signup-phoneNumber" />
-                            </div>
-                            <div>
+                                <input type="text" name="phoneNumber" id="signup-phoneNumber" placeholder="Phone #"/>
                                 <input type="submit" value="Submit"/>
-                            </div>
                         </form>
                 </section>
-                </main>
-            </div>
+            </main>
+         </div>
         )
     }
 }
