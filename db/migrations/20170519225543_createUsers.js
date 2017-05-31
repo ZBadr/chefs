@@ -20,6 +20,7 @@ exports.up = function(knex, Promise) {
             table.string('password').notNullable();
             table.string('imageUrl');
             table.string('address').notNullable();
+            table.string('stripeToken');
             table.bigInteger('phoneNumber').notNullable();
             table.timestamp('createdAt').defaultTo(knex.fn.now());
             table.timestamp('updatedAt').defaultTo(knex.fn.now());;
@@ -63,7 +64,9 @@ exports.up = function(knex, Promise) {
         return knex.schema.createTable('recipes', function (table) {
             table.increments('id');
             table.string('name').notNullable();
-            table.integer('cookingTimeInMinutes').notNullable();
+            table.integer('cookingTimeInMinutes');
+            table.integer('preparationTimeInMinutes');
+            table.integer('readyTimeInMinutes').notNullable();
             table.string('imageUrl').notNullable();
             table.string('cuisine').notNullable();
             table.string('cookingSteps');
@@ -139,7 +142,7 @@ exports.up = function(knex, Promise) {
     }
 
     function createRecipeDietaryRestrictionsTable () {
-        return knex.schema.createTable('recipe_dietaryRestrictions', function(table) {
+        return knex.schema.createTable('recipe_dietaryrestrictions', function(table) {
             table.string('dietaryRestriction');
             table.integer('recipeID');
             table.foreign('recipeID').references('recipes.id');
@@ -204,7 +207,7 @@ exports.down = function(knex, Promise) {
         return knex.schema.dropTableIfExists('recipe_equipments')
     }
     function dropRecipeDietaryRestrictionsTable () {
-        return knex.schema.dropTableIfExists('recipe_dietaryRestrictions')
+        return knex.schema.dropTableIfExists('recipe_dietaryrestrictions')
     }
 
 };

@@ -25,7 +25,11 @@
     "react-bootstrap-time-picker": "^1.0.3",
     "react-dom": "^15.5.4",
     "react-modal-dialog": "^4.0.7",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "lorem-ipsum": "^1.0.4",
+    "node-random-name": "^1.0.1",
+    "random-words": "0.0.1",
+    "unirest": "^0.5.1"
   },
   "devDependencies": {},
   "scripts": {
