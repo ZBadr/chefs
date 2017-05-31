@@ -13,6 +13,9 @@ let signupRoute = require('./routes/signup');
 let chefLoginRoute = require('./routes/cheflogin');
 let chefSignupRoute = require('./routes/chefsignup');
 let getProfileRoute = require('./routes/getProfile');
+let searchByIngredients = require('./routes/searchByIngredients');
+let searchByRecipes = require('./routes/searchByRecipes');
+let searchByChefs = require('./routes/searchByChefs');
 
 const app = express();
 
@@ -26,6 +29,9 @@ app.use('/signup', signupRoute(knex));
 app.use('/cheflogin', chefLoginRoute(knex));
 app.use('/chefsignup', chefSignupRoute(knex));
 app.use('/profile', getProfileRoute(knex));
+app.use('/searchByIngredients', searchByIngredients(knex));
+app.use('/searchByRecipes', searchByRecipes(knex));
+app.use('/searchByChefs', searchByChefs(knex));
 
 
 

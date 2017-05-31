@@ -15,7 +15,7 @@ module.exports = (knex) => {
         .where('email', req.body.email)
         .then((result, error) => {
           if(error){
-            return res.statusCode(400);
+            return res.sendStatus(400);
           }else{
             bcrypt.compare(req.body.password, result[0].password, (err, valid) => {
               if (err) {
@@ -34,14 +34,14 @@ module.exports = (knex) => {
                 res.send(token);
               }else{
                 console.log('Password INVALID');
-                res.statusCode(400);
+                res.sendStatus(400);
               }
             })
           }
         })
         .catch((error) => {
           console.log('Login error:' + error);
-          res.statusCode(400);
+          res.sendStatus(400);
         })
 
   });

@@ -5,6 +5,7 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import TextField from 'material-ui/TextField';
 import { Link } from 'react-router-dom';
+import validator from 'validator';
 
 
 
@@ -21,6 +22,8 @@ const styles = {
     overflowY: 'auto',
   },
 };
+
+
 
 // Temporary seed data for view
 const tilesData = [
@@ -111,25 +114,137 @@ const tilesData1 = [
 
 class Home extends Component {
 
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      emptySearchByIngredients: false,
+      emptySearchByChef: false,
+      emptySearchByDish: false,
+      noResult: false,
+      result: []
+    };
+  }
+
+
+
+  handleSearchByDish = (e) => { //THIS FINDS CHEF BY DISH
+    console.log('EVENT TARGET URL: ' + e.target.url);
+    if (e.key === 'Enter'){
+      this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
+      let query = document.getElementById('search-by-dish').value;
+      console.log('QUERY IN THE HANDLER: ' + query);
+      if (validator.isEmpty(query)) {
+          return this.setState({emptySearchByDish: true});
+      }else{
+          let oReq = new XMLHttpRequest(),
+              method = "POST",
+              url = "/searchByRecipes";
+          oReq.open(method, url);
+          oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          const self=this;
+          oReq.onreadystatechange = function () {
+            if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+              let result = JSON.parse(oReq.responseText)
+              let updatedResults = self.state.result.concat(result[0].email);
+              self.setState({result: updatedResults});
+            }else if(oReq.status === 400){
+              console.log(oReq.status);
+              return self.setState({noResult: true});
+            }
+          };
+          console.log('QUERY SUBMITTED TO SERVER: ' + `search=${encodeURIComponent(query)}`);
+          oReq.send(`search=${encodeURIComponent(query)}`);
+      }
+      e.target.value = "";
+    }
+  }
+
+  handleSearchByIngredients = (e) => {
+    if (e.key === 'Enter'){
+      this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
+      let query = document.getElementById('search-by-ingredients').value;
+      console.log('QUERY IN THE HANDLER: ' + query);
+      if (validator.isEmpty(query)) {
+          return this.setState({emptySearchByIngredients: true});
+      }else{
+          let oReq = new XMLHttpRequest(),
+              method = "POST",
+              url = "/searchByIngredients";
+          oReq.open(method, url);
+          oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          const self=this;
+          oReq.onreadystatechange = function () {
+            if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+              let result = JSON.parse(oReq.responseText)
+              let updatedResults = self.state.result.concat(result[0].name);//THIS IS THE SEARCH RESULT OBJECT
+              self.setState({result: updatedResults});
+            }else if(oReq.status === 400){
+              console.log(oReq.status);
+              return self.setState({noResult: true});
+            }
+          };
+          console.log('QUERY SUBMITTED TO SERVER: ' + `search=${encodeURIComponent(query)}`);
+          oReq.send(`search=${encodeURIComponent(query)}`);
+      }
+      e.target.value = "";
+    }
+  }
+
+  handleSearchByChefs = (e) => {
+    if (e.key === 'Enter'){
+      this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
+      let query = document.getElementById('search-by-chefs').value;
+      console.log('QUERY IN THE HANDLER: ' + query);
+      if (validator.isEmpty(query)) {
+          return this.setState({emptySearchByChefs: true});
+      }else{
+          let oReq = new XMLHttpRequest(),
+              method = "POST",
+              url = "/searchByChefs";
+          oReq.open(method, url);
+          oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          const self=this;
+          oReq.onreadystatechange = function () {
+            if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+              let result = JSON.parse(oReq.responseText)
+              let updatedResults = self.state.result.concat(result[0].name);//THIS IS THE SEARCH RESULT OBJECT
+              self.setState({result: updatedResults});
+            }else if(oReq.status === 400){
+              console.log(oReq.status);
+              return self.setState({noResult: true});
+            }
+          };
+          console.log('QUERY SUBMITTED TO SERVER: ' + `search=${encodeURIComponent(query)}`);
+          oReq.send(`search=${encodeURIComponent(query)}`);
+      }
+      e.target.value = "";
+    }
+  }
+
   render() {
     return (
       <div className="Home">
         <div className="searchboxes">
           <div className="search-dish">
             <TextField
+                id="search-by-dish"
                 hintText="Search by dish"
+                onKeyPress={this.handleSearchByDish}
               /><br />
               <br />
             <TextField
+                id="search-by-ingredients"
                 hintText="Search by ingredients"
+                onKeyPress={this.handleSearchByIngredients}
               /><br />
           </div>
-
           <div className="search-chef">
-            <TextField hintText="Search by chef"/><br />
+            <TextField id="search-by-chefs" hintText="Search by chef" onKeyPress={this.handleSearchByChefs}/><br />
           </div>
           </div>
 
+          {this.state.noResult ? <h1>No result</h1> : <h1>{this.state.result}</h1>}
 
           <div style={styles.root}>
             <GridList
@@ -155,9 +270,9 @@ class Home extends Component {
             <h5>More recipes</h5>
           </Link>
 
-          
 
-          
+
+
          <div style={styles.root}>
             <GridList
               cellHeight={100}
