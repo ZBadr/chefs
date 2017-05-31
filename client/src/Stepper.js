@@ -120,16 +120,10 @@ const tilesData1 = [
   },
 ];
 
-/**
- * Vertical steppers are designed for narrow screen sizes. They are ideal for mobile.
- *
- * To use the vertical stepper with the contained content as seen in spec examples,
- * you must use the `<StepContent>` component inside the `<Step>`.
- *
- * <small>(The vertical stepper can also be used without `<StepContent>` to display a basic stepper.)</small>
- */
+
 class VerticalLinearStepper extends React.Component {
 
+// state and click functions
   state = {
     finished: false,
     stepIndex: 0,
@@ -169,6 +163,7 @@ handleClose = () => {
     const {stepIndex} = this.state;
 
     return (
+      // buttons for step process
       <div style={{margin: '12px 0'}}>
         <RaisedButton
           label={stepIndex === 2 ? 'Send Order' : 'Next'}
@@ -210,11 +205,14 @@ handleClose = () => {
     ];
 
     return (
-      <div style={{maxWidth: 1200, maxHeight: 1200, margin: 'auto'}}>
+      // Background image, width and height of stepper set here 
+      <div className="stepper-background" style={{maxWidth: 1400, maxHeight: 1400, margin: 'auto'}}>
         <Stepper activeStep={stepIndex} orientation="vertical">
           <Step>
+            {/*First step starts here*/}
             <StepLabel>Select Dishes</StepLabel>
             <StepContent>
+              {/*Search fields for dishes */}
                 <div>
                     <TextField
                       hintText="Search by dish"
@@ -224,13 +222,14 @@ handleClose = () => {
                       hintText="Search by ingredients"
                       /><br />
                 </div>
+                {/*Section for recipe/dish tile styling and creation*/}
               <div style={styles.root}>
                 <GridList
                     cellHeight={180}
                     style={styles.gridList}
                     >
                     <Subheader id="sub">Dishes</Subheader>
-                    {/*Looping and populating tiles starts here*/}
+                    {/*Looping and populating of recipe/dish tiles starts here*/}
                     {tilesData.map((tile) => (
                         <GridTile
                             onTouchTap={this.handleOpen(tile)}
@@ -241,8 +240,9 @@ handleClose = () => {
                             <img src={tile.img} />
                         </GridTile>
                         ))}
-                        {/*End of tile looping and populating*/}
+                        {/*End of recipe/dish tile looping and populating*/}
                     </GridList>
+                    {/*Information populated into recipe/dish tiles */}
                     <Dialog
                         title={this.getDish()}
                         actions={actions}
@@ -250,14 +250,22 @@ handleClose = () => {
                         open={this.state.open}
                         onRequestClose={this.handleClose}
                         >
+                        {/*{this.getIngredients()}
+                        {this.getPrepMinutes()}
+                        {this.getCookingMinutes()}
+                        {this.getIntolerances()}
+                        {this.getCuisine()}*/}
                         {this.getRating()}
                     </Dialog>
+                    {/*Information populating for recipes/dishes ends here*/}
                 </div>
               {this.renderStepActions(0)}
             </StepContent>
           </Step>
+          {/*First step (dish selection) ends, second step (chef selection) begins*/}
           <Step>
             <StepLabel>Select Chef</StepLabel>
+            {/*Section for chef tile styling and creation*/}
             <StepContent>
               <div style={styles.root}>
                     <GridList
@@ -265,7 +273,7 @@ handleClose = () => {
                         style={styles.gridList}
                         >
                         <Subheader id="sub">Chefs </Subheader>
-                    {/*Looping and populating tiles starts here*/}
+                    {/*Looping and populating chef tiles starts here*/}
                         {tilesData1.map((tile) => (
                             <GridTile
                                 onTouchTap={this.handleOpen(tile)}
@@ -277,8 +285,9 @@ handleClose = () => {
                                 <img src={tile.img} />
                             </GridTile>
                         ))}
-                    {/*End of tile looping and populating*/}
+                    {/*End of chef tile looping and populating*/}
                     </GridList>
+                    {/*Information populated into chef tiles */}
                     <Dialog
                         title={this.getName()}
                         actions={actions}
@@ -288,10 +297,12 @@ handleClose = () => {
                         >
                         {this.getRating()}
                     </Dialog>
+                   {/*Information populating for chef tiles ends here*/}
                 </div>
               {this.renderStepActions(1)}
             </StepContent>
           </Step>
+          {/*Step 2 (chef selection) ends here and step 3 (order confirmation and sending) starts here*/}
           <Step>
             <StepLabel>Review & send order </StepLabel>
             <StepContent>
@@ -329,6 +340,7 @@ handleClose = () => {
             </StepContent>
           </Step>
         </Stepper>
+        {/*end of step process*/}
         {finished && (
           <p style={{margin: '20px 0', textAlign: 'center'}}>
             Your order has been sent!
@@ -338,7 +350,7 @@ handleClose = () => {
       </div>
     );
   }
-
+// functions for populating tile data
 getDish = () => {
       if (!this.state.currentTile) {
           return 'Test Content';
@@ -346,20 +358,54 @@ getDish = () => {
       return this.state.currentTile.dish;
   }
 
-  getRating = () => {
+getRating = () => {
       if (!this.state.currentTile) {
           return 'Test Content';
       }
       return 'Rating: ' + this.state.currentTile.rating;
   }
 
-  getName = () => {
+getName = () => {
       if (!this.state.currentTile) {
           return 'Test Content';
       }
       return this.state.currentTile.name;
   }
 
+getPrepMinutes = () => {
+      if (!this.state.currentTile) {
+          return 'Test Content';
+      }
+      return "Prep Time: " + this.state.currentTile.preparationMinutes;
+  }
+
+getCookingMinutes = () => {
+      if (!this.state.currentTile) {
+          return 'Test Content';
+      }
+      return "Cooking Time: " + this.state.currentTile.cookingMinutes;
+  }
+
+getIntolerances = () => {
+      if (!this.state.currentTile) {
+          return 'Test Content';
+      }
+      return "Intolerances: " + this.state.currentTile.intolerances.join(", ");
+  }
+
+getCuisine = () => {
+      if (!this.state.currentTile) {
+          return 'Test Content';
+      }
+      return "Cuisine: " + this.state.currentTile.cuisine.join(", ");
+  }
+
+getIngredients = () => {
+      if (!this.state.currentTile) {
+          return 'Test Content';
+      }
+      return "Ingredients: " + this.state.currentTile.ingredients.join(", ");
+  }
 
 
 

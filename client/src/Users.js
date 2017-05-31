@@ -10,7 +10,8 @@ class Users extends Component {
     super(props);
     this.state={
       redirect: false,
-      user: {}
+      user: {},
+      showHello: true,
     }
   }
 
@@ -37,9 +38,19 @@ class Users extends Component {
     }
   }
 
+//     componentDidMount() {
+//       this.showHello();
+//     }
+// showHello() {
+//   setTimeout(() => {
+//     this.setState({
+//       showHello: false,
+//     });
+//   }, 1000);
+// }
   render() {
       return (
-          <div>
+          <div className="user-profile-page">
             <h1>Hello {this.state.user.firstName}!</h1>
             <Info />
             <Orderslist />

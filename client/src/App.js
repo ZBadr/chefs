@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {red200, red300} from 'material-ui/styles/colors';
+import {red300} from 'material-ui/styles/colors';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Badge from 'material-ui/Badge';
@@ -69,22 +69,17 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-            
-            <AppBar className="appbar" title="Chefs 4 Hire" iconClassNameRight="appbar-cart" 
-            iconElementRight={<Badge badgeContent={4} primary={true} ><NotificationsIcon /></Badge>} 
-            iconElementLeft={<div><FlatButton label="Menu" onTouchTap={this.handleToggle}/>
-            <Drawer openSecondary={true} open={this.state.open}>
-              <AppBar title="Menu" />
-              <MenuItem className="menulink"><Link to="/">Home</Link></MenuItem>
-              <MenuItem class="menulink"><Link to = "/Stepper">Stepper</Link></MenuItem>
-              {this.state.authenticated ? null : <MenuItem className="menulink"><Link to="/user">Log In/Sign Up</Link></MenuItem> }
-              <MenuItem className="menulink"><Link to="/chefreg"> Chef Registration </Link></MenuItem>
-              {this.state.authenticated ? <MenuItem className="menulink"><Link to="/Users">Profile</Link></MenuItem> : null }
-              <MenuItem className="menulink"><Link to="/chefsprofile"> Chef Profile </Link></MenuItem>
-              <MenuItem className="menulink"><Link to="/cart">Cart({this.state.cartItems.length})</Link></MenuItem>
-              <MenuItem className="menulink" ><Link to="/OrderConfirmation"> Order Confirmation </Link></MenuItem>
-              {this.state.authenticated ? <MenuItem className="menulink" onClick={this.handleLogOut}>Log Out</MenuItem> : null}
-            </Drawer></div>}/>
+
+            <AppBar className="appbar" title="Home Cooked" iconClassNameRight="appbar-logout" 
+            iconElementRight={this.state.authenticated ?  <MenuItem  onClick={this.handleLogOut}>Log Out</MenuItem> : null } 
+            iconElementLeft={<div>
+            <Link className="appbar-link-login" to="/user">Log In & Sign Up</Link>
+            <Link className="appbar-link-chefreg" to="/chefreg"> Chef Registration </Link>
+            <Link className="appbar-link-home" to="/">Home </Link>
+            <Link className="appbar-link-order" to = "/Stepper">Order </Link>
+            <Link className="appbar-link-profile" to="/Users">Profile</Link>
+            <Link className="appbar-link-chefsprofile" to="/chefsprofile"> Chef Profile </Link>
+            </div>}/>
 
             <Route exact path="/" component={Home}/>
             <Route exact path="/Stepper" component={Stepper}/>

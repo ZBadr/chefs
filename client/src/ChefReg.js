@@ -106,21 +106,15 @@ class ChefReg extends Component {
 
   render(){
     return(
-      <div>
+      <div className="chefregpage">
          <section className="main">
                 <h2>Chef Login</h2>
                     <h7>{this.state.loginError ? "Invalid login" : null}</h7>
-                    <form id="login-form" onSubmit={this.handleChefLogin} >
-                        <div>
+                    <form id="login-form" onSubmit={this.handleChefLogin} > 
                         <h8>{this.state.emptyLoginEmail ? "This field cannot be empty" : null}</h8>
-                        <label>Email:</label>
-                        <input type="email" name="email" id="login-email" /><br/>
-                        </div>
-                        <div>
+                        <input type="email" name="email" id="login-email" placeholder="Email" /><br/>
                         <h8>{this.state.emptyLoginPassword ? "This field cannot be empty" : null}</h8>
-                        <label>Password:</label>
-                        <input type="password" name="password" id="login-password"/>
-                        </div>
+                        <input type="password" name="password" id="login-password" placeholder="Password"/>
                         <div>
                         <input type="submit" value="Submit" />
                         </div>
@@ -131,7 +125,7 @@ class ChefReg extends Component {
                     <h8>{this.state.emptySignupFirstName ? "Invalid Entry" : null}</h8>
                     <input id="chefFirstName" type = "textarea" name="firstName" placeholder="First Name"></input><br/>
                     <h8>{this.state.emptySignupLastName ? "Invalid Entry" : null}</h8>
-                    <input id="chefLastName" type = "textarea" name="lastName" placeholder="LastName"></input><br/>
+                    <input id="chefLastName" type = "textarea" name="lastName" placeholder="Last Name"></input><br/>
                     <h8>{this.state.emptySignupEmail ? "Invalid Entry" : null}</h8>
                     <input id="chefEmail" type = "email" name="email" placeholder="Email"></input><br/>
                     <h8>{this.state.emptySignupPassword ? "Invalid Entry" : null}</h8>
