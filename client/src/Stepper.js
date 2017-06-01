@@ -341,8 +341,8 @@ class VerticalLinearStepper extends React.Component {
                         open={this.state.open}
                         onRequestClose={this.handleClose}
                         >
-                        {/*{this.getIngredients()}
-                        {this.getPrepMinutes()}
+                        {this.getIngredients()}
+                        {/*{this.getPrepMinutes()}
                         {this.getCookingMinutes()}
                         {this.getIntolerances()}
                         {this.getCuisine()}*/}
@@ -495,7 +495,7 @@ getIngredients = () => {
       if (!this.state.currentTile) {
           return 'Test Content';
       }
-      return "Ingredients: " + this.state.currentTile.ingredients.join(", ");
+      return "Ingredients: " + this.state.currentTile.ingredientName;
   }
 
 

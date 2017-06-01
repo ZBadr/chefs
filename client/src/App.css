@@ -67,9 +67,15 @@
   margin-left: 80vw;
 }
 
-.Home{
+.home-subheader{
   text-align: center;
 }
+
+.Home{
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
 
 .searchboxes{
   border-radius: 10px;

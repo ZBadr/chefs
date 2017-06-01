@@ -3,7 +3,7 @@
 }
 
 .user-profile{
-  position: relative;
+  /*position: relative;*/
   padding: 1em;
 }
 
@@ -13,11 +13,11 @@ h1{
 
 .user-list{
   position: absolute;
-  top: 60%;
+  top: 58%;
   left: 740px;
   height: 250px;
   margin-top: -125px;
-  /*padding: 3em;*/
+  padding: 3em;
   width: 20em;
   display: inline-block;
   vertical-align: middle;

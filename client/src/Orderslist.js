@@ -7,10 +7,7 @@ class Orderslist extends Component {
     return (
       <div>
         <div className="order-summary">
-
             <Order/>
-
-
         </div>
       </div>
     );

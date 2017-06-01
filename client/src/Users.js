@@ -54,7 +54,7 @@ class Users extends Component {
           <div className="user-profile-page">
             <h1>Hello {this.state.user.firstName}!</h1>
             <Info email={this.state.user.email} address={this.state.user.address} phoneNumber={this.state.user.phoneNumber} />
-            // {this.state.user.orderHistory === null ? <h5>No Order History</h5> : <Orderslist orderHistory={this.state.user.orderHistory} />}
+            {this.state.user.orderHistory === null ? <h5>No Order History</h5> : <Orderslist orderHistory={this.state.user.orderHistory} />}
           </div>
       );
     }
