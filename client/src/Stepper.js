@@ -1,4 +1,5 @@
 import React from 'react';
+import Calendar from './Calendar.js';
 import {
   Step,
   Stepper,
@@ -15,6 +16,8 @@ import Book from 'material-ui/svg-icons/action/book';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import validator from 'validator';
+import TimePicker from 'react-bootstrap-time-picker';
+
 
 
 
@@ -172,10 +175,7 @@ class VerticalLinearStepper extends React.Component {
 
   handleNext = () => {
     const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
-    });
+    
     console.log('stepIndex in handleNext: ' , stepIndex);
     if (stepIndex === 0) {
       let cartItems = this.props.getCartItems;
@@ -200,12 +200,15 @@ class VerticalLinearStepper extends React.Component {
         }
       };
       oReq.send();
-      console.log ("after Oreq.send")
-      this.setState({
-        stepIndex: 1
-      })
+      // console.log ("after Oreq.send")
+      // this.setState({
+      //   stepIndex: 1
+      // })
     }
-    
+    this.setState({
+      stepIndex: stepIndex + 1,
+      finished: stepIndex >= 2,
+    });
   };
 
   handlePrev = () => {
@@ -365,30 +368,27 @@ class VerticalLinearStepper extends React.Component {
                     {this.state.result.map((tile) => (
                         <GridTile
                             onTouchTap={this.handleOpen(tile)}
-                            key={tile.img}
-                            title={tile.dish}
-                            subtitle={<span>Rating: <b>{tile.rating}</b></span>}
+                            key={tile.imgageUrl}
+                            title={tile.recipeName}
                             >
-                            <img src={tile.img} />
+                            <img src={tile.imageUrl} />
                         </GridTile>
                         ))}
                         {/*End of recipe/dish tile looping and populating*/}
                     </GridList>
                     {/*Information populated into recipe/dish tiles */}
                     <Dialog
-                        title={this.getName()}
+                        title={this.getrecipeName()}
                         actions={actions}
                         modal={true}
                         open={this.state.open}
                         onRequestClose={this.handleClose}
                         >
                        
-                        {/*{this.getIngredients()}}<br/><br/>
+                        {this.getIngredients()}}<br/><br/>
                         {this.getPrepMinutes()}<br/><br/>
-                        {this.getCookingMinutes()}<br/><br/>*/}
-                      
-                        {/*{this.getIntolerances()}
-                        {this.getCuisine()}*/}
+                        {this.getCookingMinutes()}<br/><br/>
+
                     </Dialog>
                     {/*Information populating for recipes/dishes ends here*/}
                 </div>
@@ -410,26 +410,26 @@ class VerticalLinearStepper extends React.Component {
                         {this.state.chefResult.map((tile) => (
                             <GridTile
                                 onTouchTap={this.handleOpen(tile)}
-                                key={tile.img}
-                                title={tile.name}
-                                subtitle={<span>Rating <b>{tile.rating}</b></span>}
-                                actionIcon={<IconButton><Book color="white" /></IconButton>}
+                                key={tile.imageUrl}
+                                title={tile.firstName}
                                 >
-                                <img src={tile.img} />
+                                <img src={tile.imageUrl} />
                             </GridTile>
                         ))}
                     {/*End of chef tile looping and populating*/}
                     </GridList>
                     {/*Information populated into chef tiles */}
                     <Dialog
-                        title={this.getName()}
+                        title={this.getFirstName() + " " + this.getLastName()}
                         actions={actions}
                         modal={true}
                         open={this.state.open}
                         onRequestClose={this.handleClose}
                         >
-                       {/*{this.getFirstName()}<br/><br/>
+                       {/*{this.getFirstName()} 
                        {this.getLastName()}<br/><br/>*/}
+                       {this.getRate()}<br/><br/>
+                       {this.getDescription()}<br/><br/>
                     </Dialog>
                    {/*Information populating for chef tiles ends here*/}
                 </div>
@@ -441,25 +441,28 @@ class VerticalLinearStepper extends React.Component {
             <StepLabel>Review & send order </StepLabel>
             <StepContent>
               <div className="orderConfirmation">
+                <div>
                     <section className="names">
+
                         <div>Name: Client name goes here</div>
                         <div>Chef: Chef name goes here</div>
                     </section>
                     <section className="orderItems">
-                        <div id="items">Item 1</div><div id="prices"> Time 1  </div><div id="servingstext"> Servings: <button>&minus;</button> 2 <button >+</button></div><br/>
-                        <div id="items">Item 2</div><div id="prices"> Time 2  </div><div id="servingstext"> Servings: <button>&minus;</button> 2 <button >+</button></div><br/>
-                        <div id="items">Item 3</div><div id="prices"> Time 3  </div><div id="servingstext"> Servings: <button>&minus;</button> 2 <button >+</button></div><br/>
-                        <span id="prices">Total Price</span>
+                      {this.props.getCartItems.map( (item) => {
+                        return <div><div id="items">{item.recipeName}</div><br/><div id="prices"> {item.cookingTimeInMinutes}  </div><br/></div>
+                      })}
+                       {/*{this.props.getCartItems.map( (item) =>{
+                        return <span id="prices">Total Price</span>
+                       }*/}
                     </section>
                     <section className="address">
-                        <div>Street/Apartment Address: </div>
-                        <div>City: </div>
-                        <div>Province: </div>
-                        <div>Postal Code: </div>
+                        <div>Address: 56 Chococlate Lane </div>
+                        <div>City: Burgerville </div>
+                        <div>Postal Code: M51 6S2</div>
                     </section>
                     <section className="timeAndDate">
-                        <div>Time: </div>
-                        <div>Date: </div>
+                        <div>Time: <TimePicker start="10:00" end="21:00" step={30} /></div>
+                        <div className="date-picker"> Date: <Calendar /> </div>
                     </section>
                     <section className="comments">
                         <form action="/OrderConfirmation" method="post">
@@ -469,6 +472,7 @@ class VerticalLinearStepper extends React.Component {
                             </div>
                         </form>
                     </section>
+                    </div>
                 </div>
               {this.renderStepActions(2)}
             </StepContent>
@@ -485,18 +489,33 @@ class VerticalLinearStepper extends React.Component {
     );
   }
 // functions for populating tile data
-getName = () => {
+getrecipeName = () => {
       if (!this.state.currentTile) {
           return 'Test Content';
       }
       return this.state.currentTile.recipeName;
   }
 
-getName = () => {
+getFirstName = () => {
       if (!this.state.currentTile) {
           return 'Test Content';
       }
-      return this.state.currentTile.name;
+      return this.state.currentTile.firstName;
+  }
+
+getRate = () => {
+      if (!this.state.currentTile) {
+          return 'Test Content';
+      }
+      let x = this.state.currentTile.hourlyRateInCents/100;
+      return "$ " + x;
+  }
+
+getDescription = () => {
+      if (!this.state.currentTile) {
+          return 'Test Content';
+      }
+      return this.state.currentTile.description;
   }
 
 getLastName = () => {

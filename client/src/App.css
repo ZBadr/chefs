@@ -2,6 +2,10 @@
   background-image: url("food-background.png")
 }
 
+.timeAndDate{
+  padding: 5em;
+}
+
 .appbar{
   position: relative;
   height: 120px;
@@ -143,6 +147,8 @@ text-align: center;
   margin-right: 1em;
   margin-bottom: 2em;
 }
+
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

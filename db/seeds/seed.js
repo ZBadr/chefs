@@ -131,7 +131,7 @@ exports.seed = function(knex, Promise) {
                 lastName: americanNames.last(),
                 description: loremIpsum({ count: 1, units: 'sentences' }),
                 phoneNumber: Math.round(Math.random()*1e10),
-                hourlyRateInCents: Math.round(Math.random()*1e4),
+                hourlyRateInCents: 5000 + Math.round((Math.random() - 0.5)*1000),
                 imageUrl: chefPics[i]
             }
             obj.email = obj.firstName + obj.lastName + '@gmail.com';
@@ -225,11 +225,11 @@ exports.seed = function(knex, Promise) {
           let chef_recipesArr = [];
           counter = 0;
           for (i = 0; i < 50; i++) {
-            for (j = 0; j < 25; j++) {
+            for (j = 0; j < 140; j++) {
               chef_recipesArr.push(
                 knex('chef_recipes').insert([{
                 chefID: i + 1,
-                recipeID: counter % 45 + 1
+                recipeID: counter % 140 + 1
               }])
               )
               counter += 1

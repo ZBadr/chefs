@@ -21,11 +21,11 @@ router.get("/", (req, res) => {
         console.log("result:", result)
         knex
           .count("email")
-          .select("firstName","lastName","description","hourlyRateInCents")
+          .select("imageUrl","firstName","lastName","description","hourlyRateInCents")
           .from("chefs")
           .join("chef_recipes", 'id', 'chefID')
           .whereIn("recipeID", result)
-          .groupBy("email","firstName","lastName","description","hourlyRateInCents")
+          .groupBy("imageUrl","email","firstName","lastName","description","hourlyRateInCents")
           .having(knex.raw("count(email)"), "=", result.length)
           .then((result) => {
             console.log(result)

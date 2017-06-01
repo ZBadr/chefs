@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import 'react-date-picker/index.css';
 import { DateField, DatePicker } from 'react-date-picker'
 
-class Cal extends Component {
+class Calendar extends Component {
   render(){
     return(
       <div>
-        <h1>Delivery Time</h1>
         <DateField
           dateFormat="YYYY-MM-DD"
           forceValidDate={true}
@@ -27,4 +26,4 @@ class Cal extends Component {
     );
   }
 }
-export default Cal;
+export default Calendar;
