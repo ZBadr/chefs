@@ -26,7 +26,7 @@ import Users from './Users.js';
 import ChefReg from './ChefReg.js';
 import ChefsProfile from './ChefsProfile.js';
 import OrderConfirmation from './OrderConfirmation.js';
-import Stepper2 from './Stepper2.js';
+
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -106,7 +106,7 @@ class App extends Component {
             <Route path="/ChefReg" component={ChefReg}/>
             <Route path="/chefsprofile" component={ChefsProfile}/>
             <Route path="/OrderConfirmation" component={OrderConfirmation}/>
-            <Route path="/stepper2" component={Stepper2}/>
+
 
 
 
