@@ -12,6 +12,7 @@ module.exports = (knex) => {
     console.log(req.body);
         knex('chefs')
         .insert({
+          id: 52,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,

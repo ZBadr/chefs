@@ -19,7 +19,6 @@ import validator from 'validator';
 
 
 
-
 // Styling for tiles
 const styles = {
   root: {
@@ -124,7 +123,7 @@ const tilesData1 = [
 
 
 
-class VerticalLinearStepper extends React.Component {
+class Stepper2 extends React.Component {
 
 // state and click functions
   state = {
@@ -143,9 +142,10 @@ class VerticalLinearStepper extends React.Component {
     }
   }
 
-  handleNext = (e) => {
-    e.preventDefault();
-    let cartItems = this.props.getCartItems;
+  handleNext = () => {
+    const {stepIndex} = this.state;
+    if (stepIndex === 0) {
+      let cartItems = this.props.getCartItems;
       let query = [];
       cartItems.forEach((item) => {
         query.push(item.recipeName);
@@ -168,10 +168,9 @@ class VerticalLinearStepper extends React.Component {
       };
       oReq.send();
     }
-
-    let index = this.state.stepIndex + 1;
     this.setState({
-      stepIndex: index + 1
+      stepIndex: stepIndex + 1,
+      finished: stepIndex >= 2,
     });
   };
 
@@ -194,45 +193,23 @@ class VerticalLinearStepper extends React.Component {
     this.setState({open: false, currentTile: null});
   };
 
-      // // buttons for step process
-      // <div style={{margin: '12px 0'}}>
-      //   <RaisedButton
-      //     label='Next'
-      //     disableTouchRipple={true}
-      //     disableFocusRipple={true}
-      //     primary={true}
-      //     onTouchTap={this.handleNext}
-      //     style={{marginRight: 12}}
-      //   />
-      // </div>
+  renderStepActions(step) {
+    const {stepIndex} = this.state;
 
-
-  handleFindChefByDish = () => {
-    let cartItems = this.props.getCartItems;
-      let query = [];
-      cartItems.forEach((item) => {
-        query.push(item.recipeName);
-      });
-      // let query = this.props.getCartItems.split(",");
-      let oReq = new XMLHttpRequest(),
-          method = "GET",
-          url = `/findChefByRecipes?search=${encodeURIComponent(query)}`;
-      oReq.open(method, url);
-      oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      const self=this;
-      oReq.onreadystatechange = function () {
-        if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
-          let result = JSON.parse(oReq.responseText)
-          let updatedResults = self.state.chefResult.concat(result);//THIS IS THE SEARCH RESULT OBJECT
-          self.setState({chefResult: updatedResults});
-        }else if(oReq.status === 400){
-          return self.setState({noResult: true});
-        }
-      };
-      oReq.send();
-    }
+    return (
+      // buttons for step process
+      <div style={{margin: '12px 0'}}>
+        <RaisedButton
+          label='Next'
+          disableTouchRipple={true}
+          disableFocusRipple={true}
+          primary={true}
+          onTouchTap={this.handleNext}
+          style={{marginRight: 12}}
+        />
+      </div>
+    );
   }
-
 
   handleSearchByIngredients = (e) => {
     if (e.key === 'Enter'){
@@ -297,7 +274,7 @@ class VerticalLinearStepper extends React.Component {
 
 
   render() {
-
+    const {finished, stepIndex} = this.state;
     //Action buttons for dialog pop-up when clicking tiles
     const actions = [
       <FlatButton
@@ -317,63 +294,8 @@ class VerticalLinearStepper extends React.Component {
     return (
       // Background image, width and height of stepper set here
       <div className="stepper-background" style={{maxWidth: 1400, maxHeight: 1400, margin: 'auto'}}>
-                {this.state.stepIndex === 0 ?
-                  <div>
-                  <div>
-                    <TextField
-                      id="search-by-dish"
-                      hintText="Search by dish"
-                      onKeyPress={this.handleSearchByDish}
-                      /><br />
-                      <br />
-                    <TextField
-                      id="search-by-ingredients"
-                      hintText="Search by ingredients"
-                      onKeyPress={this.handleSearchByIngredients}
-                      /><br />
-                </div>
 
-              <div style={styles.root}>
-                <GridList
-                    cellHeight={180}
-                    style={styles.gridList}
-                    >
-                    <Subheader id="sub">Dishes</Subheader>
-                    {/*Looping and populating tiles starts here*/}
-                    {this.state.result.map((tile) => (
-                        <GridTile
-                            onTouchTap={this.handleOpen(tile)}
-                            key={tile.imageUrl}
-                            title={tile.recipeName}
-                            subtitle={<span>Rating: <b>{tile.rating}</b></span>}
-                            >
-                            <img src={tile.imageUrl} />
-                        </GridTile>
-                        ))}
-                        {/*End of recipe/dish tile looping and populating*/}
-                    </GridList>
-                    {/*Information populated into recipe/dish tiles */}
-                    <Dialog
-                        title={this.getDish()}
-                        actions={actions}
-                        modal={true}
-                        open={this.state.open}
-                        onRequestClose={this.handleClose}
-                        >
-                        {/*{this.getIngredients()}
-                        {this.getPrepMinutes()}
-                        {this.getCookingMinutes()}
-                        {this.getIntolerances()}
-                        {this.getCuisine()}*/}
-                        {this.getRating()}
-                    </Dialog>
-                    {/*Information populating for recipes/dishes ends here*/}
-                </div>
-                </div>
-                 :
-                 null }
-
-                {this.state.stepIndex === 1 ? <div style={styles.root}>
+        <div style={styles.root}>
                     <GridList
                         cellHeight={180}
                         style={styles.gridList}
@@ -404,23 +326,12 @@ class VerticalLinearStepper extends React.Component {
                         {this.getRating()}
                     </Dialog>
                    {/*Information populating for chef tiles ends here*/}
-                </div> : null}
+                </div>
 
 
-                // buttons for step process
-            <div style={{margin: '12px 0'}}>
-              <RaisedButton
-                label='Next'
-                disableTouchRipple={true}
-                disableFocusRipple={true}
-                primary={true}
-                onTouchTap={this.handleNext}
-                style={{marginRight: 12}}
-              />
-            </div>
       </div>
-  //   );
-  // }
+    );
+  }
 // functions for populating tile data
 getDish = () => {
       if (!this.state.currentTile) {
@@ -479,7 +390,7 @@ getIngredients = () => {
   }
 
 
-);
+
 }
 
-export default VerticalLinearStepper;
+export default Stepper2;

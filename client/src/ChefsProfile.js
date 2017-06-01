@@ -35,7 +35,6 @@ class ChefsProfile extends Component {
         if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
           console.log('RESULT OBJECT FROM THE SERVER BEFORE SETTING STATE: ' + oReq.responseText);
           self.setState({chef: JSON.parse(oReq.responseText)});
-          console.log(JSON.parse(oReq.responseText).orderHistory[0].recipeName);
         };
       };
       console.log(this.state.chef.firstName);

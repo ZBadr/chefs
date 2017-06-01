@@ -26,6 +26,7 @@ import Users from './Users.js';
 import ChefReg from './ChefReg.js';
 import ChefsProfile from './ChefsProfile.js';
 import OrderConfirmation from './OrderConfirmation.js';
+import Stepper2 from './Stepper2.js';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -91,6 +92,7 @@ class App extends Component {
             { this.state.authenticated && this.state.chef ? null : <Link className="appbar-link-order" to = "/Stepper">Order </Link> }
             { this.state.authenticated && this.state.user ? <Link className="appbar-link-profile" to="/Users">Profile</Link> : null }
             { this.state.authenticated && this.state.chef ? <Link className="appbar-link-chefsprofile" to="/chefsprofile"> Chef Profile </Link> : null }
+
             </div>}/>
             <Route exact path="/" component={Home}/>
             <Route exact path="/Stepper" component={() => <Stepper getCartItems={this.state.cartItems} changeCartItems={this.handleCartChange} />} />
@@ -104,6 +106,8 @@ class App extends Component {
             <Route path="/ChefReg" component={ChefReg}/>
             <Route path="/chefsprofile" component={ChefsProfile}/>
             <Route path="/OrderConfirmation" component={OrderConfirmation}/>
+            <Route path="/stepper2" component={Stepper2}/>
+
 
 
             <Footer />
