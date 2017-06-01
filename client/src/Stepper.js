@@ -292,7 +292,7 @@ class VerticalLinearStepper extends React.Component {
     ];
 
     return (
-      // Background image, width and height of stepper set here 
+      // Background image, width and height of stepper set here
       <div className="stepper-background" style={{maxWidth: 1400, maxHeight: 1400, margin: 'auto'}}>
         <Stepper activeStep={stepIndex} orientation="vertical">
           <Step>

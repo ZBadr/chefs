@@ -2,7 +2,7 @@ const fs = require('fs');
 const knex = require('knex');
 const randomName = require('node-random-name');
 const randomWords = require('random-words');
-const loremIpsum = require('lorem-ipsum')
+const loremIpsum = require('lorem-ipsum');
 let recipeObj;
 
 fs.readFile('./jsonfile.json', 'utf8', function readFileCallBack(err, data) {
