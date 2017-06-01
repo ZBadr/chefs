@@ -175,7 +175,6 @@ class VerticalLinearStepper extends React.Component {
 
   handleNext = () => {
     const {stepIndex} = this.state;
-    
     console.log('stepIndex in handleNext: ' , stepIndex);
     if (stepIndex === 0) {
       let cartItems = this.props.getCartItems;
@@ -259,7 +258,6 @@ class VerticalLinearStepper extends React.Component {
 
   handleSearchByIngredients = (e) => {
     if (e.key === 'Enter'){
-      
       let query = document.getElementById('search-by-ingredients').value;
       if (validator.isEmpty(query)) {
           return this.setState({emptySearchByIngredients: true});
@@ -384,7 +382,6 @@ class VerticalLinearStepper extends React.Component {
                         open={this.state.open}
                         onRequestClose={this.handleClose}
                         >
-                       
                         {this.getIngredients()}}<br/><br/>
                         {this.getPrepMinutes()}<br/><br/>
                         {this.getCookingMinutes()}<br/><br/>
@@ -426,8 +423,6 @@ class VerticalLinearStepper extends React.Component {
                         open={this.state.open}
                         onRequestClose={this.handleClose}
                         >
-                       {/*{this.getFirstName()} 
-                       {this.getLastName()}<br/><br/>*/}
                        {this.getRate()}<br/><br/>
                        {this.getDescription()}<br/><br/>
                     </Dialog>

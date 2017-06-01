@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+
 module.exports = (knex) => {
   router.post("/", (req, res) => {
     console.log(req.body)
@@ -14,7 +15,10 @@ module.exports = (knex) => {
         .select("password", "firstName")
         .from("chefs")
         .where('email', req.body.email)
-        .then((result) => {
+        .then((result, error) => {
+          if(error){
+            return res.sendStatus(400);
+          }else{
             bcrypt.compare(req.body.password, result[0].password, (err, valid) => {
               if (err) {
                 console.log("Error in bcrypt");
@@ -29,12 +33,13 @@ module.exports = (knex) => {
                   process.env.JWT_SECRET,
                   {expiresIn: 60 * 60 * 24}
                 );
-                res.send(token);
+                res.send(JSON.stringify({jwtToken: token, user: "C"}));
               }else{
                 console.log('Password INVALID');
                 res.sendStatus(400);
               }
             });
+          }
         })
         .catch((error) => {
           console.log('CAUGHT ERROR');

@@ -10,16 +10,20 @@ const saltRounds = 10;
 module.exports = (knex) => {
   router.post("/", (req, res) => {
     console.log(req.body);
-        knex('chefs')
-        .insert({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          password: bcrypt.hashSync(req.body.password, saltRounds),
-          imageUrl: null,
-          description: req.body.description,
-          phoneNumber: req.body.phoneNumber,
-          hourlyRateInCents: req.body.hourlyRateInCents
+      knex('chefs')
+        .max('id')
+        .then( (x) => {
+          knex('chefs')
+          .insert({
+            id: x[0].max + 1,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, saltRounds),
+            imageUrl: null,
+            description: req.body.description,
+            phoneNumber: req.body.phoneNumber,
+            hourlyRateInCents: req.body.hourlyRateInCents
         })
         .then((result) => {
           let token = jwt.sign(
@@ -30,11 +34,12 @@ module.exports = (knex) => {
             process.env.JWT_SECRET,
             {expiresIn: 60 * 60 * 24}
           );
-          res.send(token);
+          res.send(JSON.stringify({jwtToken: token, user: "C"}));
         })
-        .catch((error) => {
-          res.sendStatus(400);
-        })
+        // .catch((error) => {
+        //   res.sendStatus(400);
+        // })
+      })
   });
   return router;
 }

@@ -34,7 +34,7 @@ exports.up = function(knex, Promise) {
             table.string('lastName').notNullable();
             table.string('email').notNullable().unique();
             table.string('password').notNullable();
-            table.string('imageUrl').notNullable();
+            table.string('imageUrl');
             table.string('description').notNullable();
             table.bigInteger('phoneNumber').notNullable();
             table.integer('hourlyRateInCents').notNullable();

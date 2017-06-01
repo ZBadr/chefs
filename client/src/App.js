@@ -27,6 +27,7 @@ import ChefReg from './ChefReg.js';
 import ChefsProfile from './ChefsProfile.js';
 import OrderConfirmation from './OrderConfirmation.js';
 
+
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: red300,
@@ -42,13 +43,17 @@ class App extends Component {
       cartItems: [],
       open: false,
       badgeContent: 0,
-      authenticated: false
+      authenticated: false,
+      user: false,
+      chef: false,
     }
   }
   handleToggle = () => this.setState({open: !this.state.open});
 
   handleLogOut = () => {
     localStorage.clear();
+    this.setState({user: false});
+    this.setState({chef: false});
     /* eslint-disable no-restricted-globals */
       location.assign("/");
   }
@@ -59,10 +64,16 @@ class App extends Component {
   }
 
   componentWillMount() {
-    if(localStorage.jwtToken){
+    if(localStorage.Tokens){
       this.setState({authenticated: true});
     }else{
       this.setState({authenticated: false});
+    }
+
+    if (localStorage.User === "U"){
+      this.setState({user: true});
+    }else if(localStorage.User === "C"){
+      this.setState({chef: true});
     }
   }
 
@@ -72,28 +83,32 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-            <AppBar className="appbar" title="Home Cooked" iconClassNameRight="appbar-logout" 
-            iconElementRight={this.state.authenticated ?  <MenuItem  onClick={this.handleLogOut}>Log Out</MenuItem> : null } 
+            <AppBar className="appbar" title="Home Cooked" iconClassNameRight="appbar-logout"
+            iconElementRight={this.state.authenticated ?  <MenuItem  onClick={this.handleLogOut}>Log Out</MenuItem> : null }
             iconElementLeft={<div>
             <Link className="appbar-link-login" to="/user">Log In & Sign Up</Link>
             <Link className="appbar-link-chefreg" to="/chefreg"> Chef Registration </Link>
             <Link className="appbar-link-home" to="/">Home </Link>
-            <Link className="appbar-link-order" to = "/Stepper">Order </Link>
-            <Link className="appbar-link-profile" to="/Users">Profile</Link>
-            <Link className="appbar-link-chefsprofile" to="/chefsprofile"> Chef Profile </Link>
+            { this.state.authenticated && this.state.chef ? null : <Link className="appbar-link-order" to = "/Stepper">Order </Link> }
+            { this.state.authenticated && this.state.user ? <Link className="appbar-link-profile" to="/Users">Profile</Link> : null }
+            { this.state.authenticated && this.state.chef ? <Link className="appbar-link-chefsprofile" to="/chefsprofile"> Chef Profile </Link> : null }
+
             </div>}/>
             <Route exact path="/" component={Home}/>
             <Route exact path="/Stepper" component={() => <Stepper getCartItems={this.state.cartItems} changeCartItems={this.handleCartChange} />} />
-            <Route path="/user" component={LoginSignup}/>
+            <Route path="/user" component={LoginSignup} />
             <Route path="/recipe/:recipeId" component={Recipe} />
             <Route exact path="/recipe" component={Recipes2}/>
             <Route path="/chef/:chefId" component={Chef} />
-            <Route exact path="/chef" component={Chefs}/>
+            <Route exact path="/chef" component={ChefsProfile}/>
             <Route path="/cart" component={() => <CartList cartItems={this.state.cartItems} />} />
-            <Route path="/Users" component={Users} />
+            <Route path="/Users" component={() => <Users isUser={this.handleUserStatus} />} />
             <Route path="/ChefReg" component={ChefReg}/>
             <Route path="/chefsprofile" component={ChefsProfile}/>
             <Route path="/OrderConfirmation" component={OrderConfirmation}/>
+
+
+
 
             <Footer />
 

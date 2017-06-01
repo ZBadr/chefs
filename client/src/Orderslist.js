@@ -7,7 +7,7 @@ class Orderslist extends Component {
     return (
       <div>
         <div className="order-summary">
-            <Order/>
+          <Order orderItem={this.props.pastOrder} />
         </div>
       </div>
     );

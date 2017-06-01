@@ -3,6 +3,7 @@ import {List, ListItem} from 'material-ui/List';
 import Email from 'material-ui/svg-icons/communication/email';
 import Phone from 'material-ui/svg-icons/communication/phone';
 import Rate from 'material-ui/svg-icons/editor/monetization-on';
+import Name from 'material-ui/svg-icons/social/person-outline';
 
 class ChefsInfo extends Component {
   // Need state here to have info of logged in user to be able to grab their info and populate image & list
@@ -15,16 +16,17 @@ class ChefsInfo extends Component {
        {/*List items start here*/}
        <div className="chef-list">
           <List>
-            <ListItem primaryText="Email goes here" leftIcon={<Email />} />
-            <ListItem primaryText="Phone goes here" leftIcon={<Phone />} />
-            <ListItem primaryText="Hourly rate goes here" leftIcon={<Rate />} />
+            <ListItem primaryText={this.props.firstName} leftIcon={<Name />} />
+            <ListItem primaryText={this.props.email} leftIcon={<Email />} />
+            <ListItem primaryText={this.props.phoneNumber} leftIcon={<Phone />} />
+            <ListItem primaryText={this.props.hourlyRate} leftIcon={<Rate />} />
           </List>
         </div>
        {/*List items end here*/}
       <div className="description">
           <p>
             <strong>Description: </strong>
-            description goes heredescription goes heredescription goes heredescription goes heredescription goes heredescription goes heredescription goes heredescription goes heredescription goes here
+            {this.props.description}
           </p>
        </div>
     </div>

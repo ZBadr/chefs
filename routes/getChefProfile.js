@@ -10,14 +10,14 @@ module.exports = (knex) => {
     let token = req.body.token;
     console.log('in /getprofile:' + token);
     let resultObj = {};
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, chef) => {
       if (err) {
         res.sendStatus(400);
       }else{
         knex
-        .select("users.firstName", "users.lastName", "users.email", "users.phoneNumber", "users.imageUrl", "users.address")
-        .from("users")
-        .whereIn("users.email", user.email)
+        .select("chefs.firstName", "chefs.lastName", "chefs.email", "chefs.phoneNumber", "chefs.imageUrl", "chefs.description", "chefs.hourlyRateInCents")
+        .from("chefs")
+        .whereIn("chefs.email", chef.email)
         .then((result) => {
           resultObj = result[0];
           console.log("users result:",resultObj)
@@ -25,16 +25,16 @@ module.exports = (knex) => {
         })
         .then(() => {
           knex
-            .select("orders.id as orderID", "orders.orderTotal", "chefs.firstName as chefFirstName", "chefs.lastName as chefLastName", "recipes.name as recipeName" )
-            .from("users")
-            .join("orders", "users.id", "orders.userID")
-            .join("chefs", "orders.chefID", "chefs.id")
+            .select("orders.id as orderID", "orders.orderTotal", "users.firstName as userFirstName", "users.lastName as userLastName", "recipes.name as recipeName" )
+            .from("chefs")
+            .join("orders", "chefs.id", "orders.chefID")
+            .join("users", "orders.userID", "users.id")
             .join("order_recipes", "orders.id", "order_recipes.orderID")
             .join("recipes", "order_recipes.recipeID", "recipes.id")
-            .whereIn("users.email", user.email)
+            .whereIn("chefs.email", chef.email)
             .then((result) => {
               resultObj.orderHistory = result;
-              console.log("users result:",resultObj);
+              console.log("chefs result:",resultObj);
               res.send(JSON.stringify(resultObj));
             })
             .catch((err) => { console.error(err); });

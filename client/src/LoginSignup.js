@@ -24,7 +24,11 @@ class LoginSignup extends Component {
     }
 
     componentWillMount() {
-        if(localStorage.jwtToken){
+        if (localStorage.User === "C") {
+            /* eslint-disable no-restricted-globals */
+            location.assign('/ChefReg');
+        }
+        if(localStorage.User === "U"){
             /* eslint-disable no-restricted-globals */
             location.assign('/Users');
         }
@@ -48,7 +52,9 @@ class LoginSignup extends Component {
             const self=this;
             oReq.onreadystatechange = function () {
               if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
-                localStorage.setItem('jwtToken', oReq.responseText);
+                let resObj = JSON.parse(oReq.responseText);
+                localStorage.setItem('Tokens', resObj.jwtToken);
+                localStorage.setItem('User', resObj.user);
                 /* eslint-disable no-restricted-globals */
                 location.assign('/Users');
               }else if(oReq.status === 400){
