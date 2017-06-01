@@ -5,24 +5,35 @@ import validator from 'validator';
 
 class ChefReg extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-        PwMismatch: false,
-       signupError: false,
-       loginError: false,
-       redirect: false,
-       emptyLoginPassword: false,
-       emptySignupPassword: false,
-       emptySignupFirstName: false,
-       emptySignupLastName: false,
-       emptyChefHourlyRate: false,
-       emptySignupPhoneNumber: false,
-       emptyLoginEmail: false,
-       emptySignupEmail: false,
-       emptyChefDescription: false
+    constructor(props){
+        super(props);
+        this.state = {
+            PwMismatch: false,
+           signupError: false,
+           loginError: false,
+           redirect: false,
+           emptyLoginPassword: false,
+           emptySignupPassword: false,
+           emptySignupFirstName: false,
+           emptySignupLastName: false,
+           emptyChefHourlyRate: false,
+           emptySignupPhoneNumber: false,
+           emptyLoginEmail: false,
+           emptySignupEmail: false,
+           emptyChefDescription: false
+        }
     }
-  }
+
+    componentWillMount() {
+        if(localStorage.User === "U") {
+            /* eslint-disable no-restricted-globals */
+            location.assign('/user');
+        }
+        if(localStorage.User === "C"){
+            /* eslint-disable no-restricted-globals */
+            location.assign('/chef');
+        }
+    }
 
     handleChefLogin = (e) => {
         e.preventDefault();
@@ -31,7 +42,7 @@ class ChefReg extends Component {
         if (!validator.isEmail(email) || validator.isEmpty(email)) {
             return this.setState({emptyLoginEmail: true});
         }
-        if(password.trim() === "") {
+        if(validator.isEmpty(password)) {
             return this.setState({emptyLoginPassword: true});
         }else{
             let oReq = new XMLHttpRequest(),
@@ -42,9 +53,11 @@ class ChefReg extends Component {
             const self=this;
             oReq.onreadystatechange = function () {
               if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
-                localStorage.setItem('jwtToken', oReq.responseText);
+                let resObj = JSON.parse(oReq.responseText);
+                localStorage.setItem('Tokens', resObj.jwtToken);
+                localStorage.setItem('User', resObj.user);
                 /* eslint-disable no-restricted-globals */
-                location.assign('/Users');
+                location.assign('/chef');
               }else if (oReq.status === 400){
                 return self.setState({loginError: true});
               }
@@ -93,9 +106,11 @@ class ChefReg extends Component {
             const self = this;
             oReq.onreadystatechange = function () {
               if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
-                localStorage.setItem('jwtToken', oReq.responseText);
+                let resObj = JSON.parse(oReq.responseText);
+                localStorage.setItem('Tokens', resObj.jwtToken);
+                localStorage.setItem('User', resObj.user);
                  /*eslint-disable no-restricted-globals*/
-                location.assign('/Users');
+                location.assign('/chef');
               }else if(oReq.status === 400){
                 return self.setState({signupError: true});
               }
@@ -110,7 +125,7 @@ class ChefReg extends Component {
          <section className="main">
                 <h2>Chef Login</h2>
                     <h7>{this.state.loginError ? "Invalid login" : null}</h7>
-                    <form id="login-form" onSubmit={this.handleChefLogin} > 
+                    <form id="login-form" onSubmit={this.handleChefLogin} >
                         <h8>{this.state.emptyLoginEmail ? "This field cannot be empty" : null}</h8>
                         <input type="email" name="email" id="login-email" placeholder="Email" /><br/>
                         <h8>{this.state.emptyLoginPassword ? "This field cannot be empty" : null}</h8>

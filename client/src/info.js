@@ -16,7 +16,8 @@ class Info extends Component {
       <img className="user-profilePicture" src="https://www.atomix.com.au/media/2015/06/atomix_user31.png" alt="chefs" height="250" width="250"/>
       <section>
        {/*List items start here*/}
-          <List className="list">
+          <List className="user-list">
+            <ListItem primaryText={this.props.firstName} leftIcon={<Name />} />
             <ListItem primaryText={this.props.email} leftIcon={<Email />} />
             <ListItem primaryText={this.props.phoneNumber} leftIcon={<Phone />} />
             <ListItem primaryText={this.props.address} leftIcon={<Location />} />

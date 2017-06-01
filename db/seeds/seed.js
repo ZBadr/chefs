@@ -2,7 +2,8 @@ const fs = require('fs');
 const knex = require('knex');
 const randomName = require('node-random-name');
 const randomWords = require('random-words');
-const loremIpsum = require('lorem-ipsum')
+const loremIpsum = require('lorem-ipsum');
+const bcrypt = require('bcrypt');
 let recipeObj;
 
 fs.readFile('./jsonfile.json', 'utf8', function readFileCallBack(err, data) {
@@ -77,8 +78,10 @@ exports.seed = function(knex, Promise) {
                 phoneNumber: Math.round(Math.random()*1e10),
                 hourlyRateInCents: Math.round(Math.random()*1e4)
             }
+            let hash = obj.firstName + obj.lastName;
+            let saltRounds = 10;
             obj.email = obj.firstName + obj.lastName + '@gmail.com';
-            obj.password = obj.firstName + obj.lastName;
+            obj.password = bcrypt.hashSync(hash, saltRounds);
             obj.imageUrl = obj.firstName + obj.lastName + '.jpg';
             chefsArr.push(obj)
           }
@@ -98,8 +101,10 @@ exports.seed = function(knex, Promise) {
                 address: loremIpsum({ count: 1, units: 'sentences' }),
                 stripeToken: null
             }
+            let hash = obj.firstName + obj.lastName;
+            let saltRounds = 10;
             obj.email = obj.firstName + obj.lastName + '@gmail.com';
-            obj.password = obj.firstName + obj.lastName;
+            obj.password = bcrypt.hashSync(hash, saltRounds);
             obj.imageUrl = obj.firstName + obj.lastName + '.jpg';
             usersArr.push(obj)
           }

@@ -30,11 +30,11 @@ module.exports = (knex) => {
             process.env.JWT_SECRET,
             {expiresIn: 60 * 60 * 24}
           );
-          res.send(token);
+          res.send(JSON.stringify({jwtToken: token, user: "C"}));
         })
-        .catch((error) => {
-          res.sendStatus(400);
-        })
+        // .catch((error) => {
+        //   res.sendStatus(400);
+        // })
   });
   return router;
 }

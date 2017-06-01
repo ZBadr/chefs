@@ -21,7 +21,7 @@ class Order extends Component {
           <div className="orderNumberActive">Status</div>
           </summary>
           <section className="orderDetails">
-            <div>Client Name</div>
+            <div>{this.props.orderItem}</div>
             <div>Chef Name</div>
             <div>Address</div>
             <div>Order date/time</div>

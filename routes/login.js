@@ -9,6 +9,7 @@ const saltRounds = 10;
 
 module.exports = (knex) => {
   router.post("/", (req, res) => {
+    console.log('REQUEST BODY JUST ENTERING THE SERVER: ' + req.body.password);
         knex
         .select("password", "firstName")
         .from("users")
@@ -31,10 +32,11 @@ module.exports = (knex) => {
                   process.env.JWT_SECRET,
                   {expiresIn: 60 * 60 * 24}
                 );
-                res.send(token);
+                res.send(JSON.stringify({jwtToken: token, user: "U"}));
               }else{
                 console.log('Password INVALID');
-                res.sendStatus(400);
+                res.status(400);
+                res.send('PASSWORD INVALID');
               }
             })
           }

@@ -135,6 +135,13 @@ class VerticalLinearStepper extends React.Component {
     chefResult: []
   };
 
+  componentWillMount() {
+    if (localStorage.User === "C") {
+        /* eslint-disable no-restricted-globals */
+        location.assign('/');
+    }
+  }
+
   handleNext = () => {
     const {stepIndex} = this.state;
     if (stepIndex === 0) {
@@ -218,24 +225,24 @@ class VerticalLinearStepper extends React.Component {
       this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
       let query = document.getElementById('search-by-ingredients').value;
       if (validator.isEmpty(query)) {
-          return this.setState({emptySearchByIngredients: true});
+        return this.setState({emptySearchByIngredients: true});
       }else{
-          let oReq = new XMLHttpRequest(),
-              method = "GET",
-              url = `/searchByIngredients?search=${query}`;
-          oReq.open(method, url);
-          oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          const self=this;
-          oReq.onreadystatechange = function () {
-            if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
-              let result = JSON.parse(oReq.responseText)
-              let updatedResults = self.state.result.concat(result);//THIS IS THE SEARCH RESULT OBJECT
-              self.setState({result: updatedResults});
-            }else if(oReq.status === 400){
-              return self.setState({noResult: true});
-            }
-          };
-          oReq.send();
+        let oReq = new XMLHttpRequest(),
+            method = "GET",
+            url = `/searchByIngredients?search=${query}`;
+        oReq.open(method, url);
+        oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        const self=this;
+        oReq.onreadystatechange = function () {
+          if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+            let result = JSON.parse(oReq.responseText)
+            let updatedResults = self.state.result.concat(result);//THIS IS THE SEARCH RESULT OBJECT
+            self.setState({result: updatedResults});
+          }else if(oReq.status === 400){
+            return self.setState({noResult: true});
+          }
+        };
+        oReq.send();
       }
       e.target.value = "";//Clears search field
     }
@@ -246,32 +253,34 @@ class VerticalLinearStepper extends React.Component {
       this.setState({result: []}); //THIS CLEARS OLD SEARCH RESULT BEFORE NEW SEARCH
       let query = document.getElementById('search-by-dish').value;
       if (validator.isEmpty(query)) {
-          return this.setState({emptySearchByDish: true});
+        return this.setState({emptySearchByDish: true});
       }else{
-          let oReq = new XMLHttpRequest(),
-              method = "GET",
-              url = `/searchByRecipes?search=${query}`;
-          oReq.open(method, url);
-          oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          const self=this;
-          oReq.onreadystatechange = function () {
-            if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
-              let result = JSON.parse(oReq.responseText)
-              let updatedResults = self.state.result.concat(result);
-              self.setState({result: updatedResults});
-            }else if(oReq.status === 400){
-              return self.setState({noResult: true});
-            }
-          };
-          oReq.send();
+        let oReq = new XMLHttpRequest(),
+            method = "GET",
+            url = `/searchByRecipes?search=${query}`;
+        oReq.open(method, url);
+        oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        const self=this;
+        oReq.onreadystatechange = function () {
+          if(oReq.readyState === XMLHttpRequest.DONE && oReq.status === 200) {
+            let result = JSON.parse(oReq.responseText)
+            let updatedResults = self.state.result.concat(result);
+            self.setState({result: updatedResults});
+          }else if(oReq.status === 400){
+            return self.setState({noResult: true});
+          }
+        };
+        oReq.send();
       }
       e.target.value = "";//Clears search field
     }
   }
 
-  handleAddToCart = () => {
+  handleAddToCart = (e) => {
     this.props.changeCartItems(this.state.currentTile);
   }
+
+
 
   render() {
     const {finished, stepIndex} = this.state;
@@ -292,7 +301,7 @@ class VerticalLinearStepper extends React.Component {
     ];
 
     return (
-      // Background image, width and height of stepper set here 
+      // Background image, width and height of stepper set here
       <div className="stepper-background" style={{maxWidth: 1400, maxHeight: 1400, margin: 'auto'}}>
         <Stepper activeStep={stepIndex} orientation="vertical">
           <Step>

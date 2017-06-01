@@ -34,7 +34,7 @@ exports.up = function(knex, Promise) {
             table.string('lastName').notNullable();
             table.string('email').notNullable().unique();
             table.string('password').notNullable();
-            table.string('imageUrl').notNullable();
+            table.string('imageUrl');
             table.string('description').notNullable();
             table.bigInteger('phoneNumber').notNullable();
             table.integer('hourlyRateInCents').notNullable();
@@ -159,7 +159,7 @@ exports.down = function(knex, Promise) {
     .then(dropRecipeIntolerancesTable)
     .then(dropChefRecipes)
     .then(dropOrderRecipes)
-    .then(dropRecipeInredients)
+    .then(dropRecipeIngredients)
     .then(dropIngredients)
     .then(dropRecipes)
     .then(dropOrders)
@@ -187,7 +187,7 @@ exports.down = function(knex, Promise) {
         return knex.schema.dropTableIfExists('ingredients')
     }
 
-    function dropRecipeInredients () {
+    function dropRecipeIngredients () {
         return knex.schema.dropTableIfExists('recipe_ingredients')
     }
 

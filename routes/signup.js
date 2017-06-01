@@ -9,6 +9,7 @@ const saltRounds = 10;
 
 module.exports = (knex) => {
   router.post("/", (req, res) => {
+    console.log('REQUEST BODY JUST ENTERING THE SERVER: ');
     console.log(req.body);
         knex('users')
         .insert({
@@ -18,7 +19,8 @@ module.exports = (knex) => {
           password: bcrypt.hashSync(req.body.password, saltRounds),
           imageUrl: null,
           address: req.body.address,
-          phoneNumber: req.body.phoneNumber
+          phoneNumber: req.body.phoneNumber,
+          stripeToken: null
         })
         .then((result, err) => {
           if (err){
@@ -35,9 +37,10 @@ module.exports = (knex) => {
           );
           res.send(token);
         })
-        .catch((error) => {
-          res.sendStatus(400);
-        })
+        // .catch((error) => {
+        //   console.log('CAUGHT ERROR');
+        //   res.sendStatus(400);
+        // })
   });
   return router;
 }
