@@ -17,7 +17,6 @@ class Info extends Component {
       <section>
        {/*List items start here*/}
           <List className="user-list">
-
             <ListItem primaryText={this.props.firstName} leftIcon={<Name />} />
             <ListItem primaryText={this.props.email} leftIcon={<Email />} />
             <ListItem primaryText={this.props.phoneNumber} leftIcon={<Phone />} />
