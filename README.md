@@ -1,5 +1,5 @@
 # HomeCooked
-HomeCooked is designed to help busy people reduce food waste and eat healthy by providing a platform where users can book chefs to come to their homes and cook for them using user-supplied ingredients.<br />
+HomeCooked is designed to help busy individuals reduce food waste and eat healthy by providing a platform where users can book chefs to come to their homes and cook for them using user-supplied ingredients.<br />
 This app is built with React.js, Express.js, Knex.js, and PostgreSQL.
 
 ## Getting Started
