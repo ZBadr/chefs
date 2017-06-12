@@ -32,7 +32,7 @@ Once the dishes and chef are selected, a summary of the order will be shown on t
 ### Stripe payment
 
 ## Team
-HomeCooked is a project by the following students from the April 2017 cohort at Lighthouse Labs Toronto
+HomeCooked is a project by the following students from the April 2017 cohort at Lighthouse Labs Toronto<br/>
 Ziad Ahmed https://github.com/ZBadr<br/>
 Billy Chang https://github.com/billyhw<br/>
 Ken Lee https://github.com/kchylee<br/>
